@@ -26,18 +26,40 @@ document.addEventListener('DOMContentLoaded', () => {
     // Generar avatar dinámico con las iniciales de la empresa
     configOverride.cliente.logo_url = "https://ui-avatars.com/api/?name=" + encodeURIComponent(magicData.empresa) + "&background=F2F2F2&color=D80F2C";
     configOverride.inversion.precio_base = magicData.precio;
+    configOverride.propuesta.subtitulo = magicData.subtitulo || configOverride.propuesta.subtitulo;
+    configOverride.propuesta.formato = magicData.formato || configOverride.propuesta.formato;
     
-    // Inyectar el texto libre de la IA como un módulo principal
-    // Usamos regex para respetar los saltos de línea del texto de la IA
-    const textoFormateado = magicData.texto.replace(/\n/g, '<br><br>').replace(/- /g, '• ');
+    // Forzar beneficios por si se perdieron
+    configOverride.beneficios = [
+      "Capacitación adaptada al flujo de trabajo real",
+      "Implantación práctica inmediata",
+      "Cumplimiento ético y legal (RGPD y Ley Europea de IA)",
+      "Soporte continuo de dudas durante 30 días"
+    ];
+
+    // Formatear Resumen inicial como el primer módulo (Saber)
+    const resumenFormateado = (magicData.resumen || magicData.texto || "").replace(/\n/g, '<br><br>').replace(/- /g, '• ');
     
     configOverride.modulos = [{
       titulo: "Análisis y Plan de Acción",
-      tipo: "Hacer",
-      duracion: "A medida",
-      descripcion: textoFormateado,
+      tipo: "Saber",
+      duracion: "Fase 1",
+      descripcion: resumenFormateado,
       puntos_clave: []
     }];
+
+    // Añadir los módulos opcionales (Hacer)
+    if(magicData.modulos && magicData.modulos.length > 0) {
+      magicData.modulos.forEach((mod, index) => {
+        configOverride.modulos.push({
+          titulo: mod.titulo,
+          tipo: "Hacer",
+          duracion: "Módulo " + (index + 1),
+          descripcion: mod.desc.replace(/\n/g, '<br>').replace(/- /g, '• '),
+          puntos_clave: []
+        });
+      });
+    }
     
     populateDashboard(configOverride);
     
