@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = Object.fromEntries(formData.entries());
       
       // Añadir info de la empresa a la que se le hace la propuesta
-      data.cliente_objetivo = document.getElementById('clientName').textContent;
+      const clientNameEl = document.getElementById('clientName');
+      data.cliente_objetivo = clientNameEl ? clientNameEl.textContent : "Catálogo Genérico";
       data.fecha_solicitud = new Date().toISOString();
 
       // Mostrar cargando
