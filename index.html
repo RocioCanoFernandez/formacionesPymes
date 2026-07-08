@@ -81,12 +81,6 @@
         <span class="card-badge" style="background:var(--border-color); color:var(--text-main);">Captación</span>
       </a>
 
-      <!-- Ejemplo de enlace a la plantilla -->
-      <a href="plantilla_propuesta.html" class="proposal-card">
-        <h3>Demo Empresa S.L.</h3>
-        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;">Programa de Formación en IA</p>
-        <span class="card-badge badge-hacer">Borrador</span>
-      </a>
 
       <!-- Placeholder para añadir nuevas propuestas -->
       <div class="proposal-card" style="border: 1px dashed var(--border-color); background:transparent; cursor:pointer;" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">
@@ -106,9 +100,37 @@
           <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nombre de la Empresa <span style="color:red">*</span></label>
           <input type="text" id="genEmpresa" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: Empresa S.L.">
         </div>
-        <div class="form-group">
-          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Inversión (Precio) <span style="color:red">*</span></label>
-          <input type="text" id="genPrecio" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: 1.200€">
+        <div class="form-group" style="grid-column: 1 / -1; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <h3 style="margin-bottom:1rem; font-size:1.2rem; color:var(--text-main);">Calculadora de Inversión y FUNDAE</h3>
+          <div class="grid-2" style="gap: 1rem;">
+            <div>
+              <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Modalidad de Presupuesto <span style="color:red">*</span></label>
+              <select id="genModalidad" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
+                <option value="Online">Solo Online (Aula Virtual)</option>
+                <option value="In-company">Solo Presencial (In-company)</option>
+                <option value="Ambas">Mostrar Ambas Opciones (Recomendado si el cliente duda)</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nº de Horas Totales <span style="color:red">*</span></label>
+              <input type="number" id="genHoras" min="1" value="4" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
+              <span style="font-size:0.8rem; color:var(--text-muted);">*FUNDAE exige un mínimo de 2 horas.</span>
+            </div>
+            <div>
+              <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nº de Alumnos <span style="color:red">*</span></label>
+              <input type="number" id="genAlumnos" min="1" value="5" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
+            </div>
+            <div>
+              <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Zona de Desplazamiento (In-company)</label>
+              <select id="genZona" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
+                <option value="0">Zona 0: Sevilla capital o hasta 30km (+0€)</option>
+                <option value="35">Zona 1: 31-60 km (+35€)</option>
+                <option value="65">Zona 2: 61-100 km (+65€)</option>
+                <option value="100">Zona 3: 101-150 km (+100€)</option>
+                <option value="custom">Zona 4: Más de 150 km (Consultar Coste)</option>
+              </select>
+            </div>
+          </div>
         </div>
         <div class="form-group">
           <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Subtítulo Propuesta</label>
@@ -158,10 +180,14 @@
   <script>
     function generarEnlace() {
       const empresa = document.getElementById('genEmpresa').value.trim();
-      const precio = document.getElementById('genPrecio').value.trim();
       const subtitulo = document.getElementById('genSubtitulo').value.trim();
       const formato = document.getElementById('genFormato').value.trim();
       const resumen = document.getElementById('genResumen').value.trim();
+      
+      const modalidad = document.getElementById('genModalidad').value;
+      const horas = parseInt(document.getElementById('genHoras').value) || 0;
+      const alumnos = parseInt(document.getElementById('genAlumnos').value) || 0;
+      const zonaVal = document.getElementById('genZona').value;
       
       const mod1Title = document.getElementById('genMod1Title').value.trim();
       const mod1Desc = document.getElementById('genMod1Desc').value.trim();
@@ -180,9 +206,41 @@
       if(mod2Title) modulos.push({titulo: mod2Title, desc: mod2Desc});
       if(mod3Title) modulos.push({titulo: mod3Title, desc: mod3Desc});
 
+      let suplemento = 0;
+      if (zonaVal === 'custom') {
+        suplemento = 0;
+      } else {
+        suplemento = parseInt(zonaVal) || 0;
+      }
+      
+      const fundaeMax = 13 * horas * alumnos;
+      let precios = [];
+      
+      if (modalidad === 'Online' || modalidad === 'Ambas') {
+        precios.push({
+          tipo: 'Online (Aula Virtual)',
+          precio: (horas * 70),
+          desc: 'Formación bonificable a través de los créditos de FUNDAE.',
+          fundae: fundaeMax,
+          badge: modalidad === 'Ambas' ? 'OPCIÓN ONLINE' : 'BONIFICABLE FUNDAE'
+        });
+      }
+      
+      if (modalidad === 'In-company' || modalidad === 'Ambas') {
+        let textInCompany = (suplemento > 0) ? `Incluye suplemento por desplazamiento. Formación bonificable a través de los créditos de FUNDAE.` : `Coste sin desplazamiento adicional (Zona 0). Formación bonificable a través de FUNDAE.`;
+        if (zonaVal === 'custom') textInCompany = "Desplazamiento sujeto a presupuesto a medida. Bonificable por FUNDAE.";
+        precios.push({
+          tipo: 'Presencial (In-company)',
+          precio: (horas * 85) + suplemento,
+          desc: textInCompany,
+          fundae: fundaeMax,
+          badge: modalidad === 'Ambas' ? 'OPCIÓN IN-COMPANY' : 'BONIFICABLE FUNDAE'
+        });
+      }
+
       const dataObj = {
         empresa: empresa,
-        precio: precio || '1.200€',
+        precios: precios,
         subtitulo: subtitulo || 'Programa adaptado a sus necesidades',
         formato: formato || 'Taller Práctico in-company',
         resumen: resumen,
