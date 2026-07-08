@@ -103,18 +103,45 @@
       
       <div class="grid-2" style="margin-bottom: 1.5rem; gap: 1.5rem;">
         <div class="form-group">
-          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nombre de la Empresa</label>
-          <input type="text" id="genEmpresa" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: Coca Cola">
+          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nombre de la Empresa <span style="color:red">*</span></label>
+          <input type="text" id="genEmpresa" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: Empresa S.L.">
         </div>
         <div class="form-group">
-          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Inversión (Precio)</label>
+          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Inversión (Precio) <span style="color:red">*</span></label>
           <input type="text" id="genPrecio" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: 1.200€">
+        </div>
+        <div class="form-group">
+          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Subtítulo Propuesta</label>
+          <input type="text" id="genSubtitulo" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: Programa adaptado a sus necesidades">
+        </div>
+        <div class="form-group">
+          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Etiqueta (Formato/Fecha)</label>
+          <input type="text" id="genFormato" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: Nov 2026 · Taller Presencial">
         </div>
       </div>
 
-      <div class="form-group" style="margin-bottom:1.5rem;">
-        <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Texto de la Propuesta (Copiado del email)</label>
-        <textarea id="genTexto" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:200px; font-size:1rem;" placeholder="Pega aquí el análisis y recomendación de la IA..."></textarea>
+      <div class="form-group" style="margin-bottom:2rem; padding-bottom:1.5rem; border-bottom: 1px dashed var(--border-color);">
+        <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Resumen y Análisis de la IA <span style="color:red">*</span></label>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">Copia aquí el diagnóstico inicial que te ha enviado la IA en el correo.</p>
+        <textarea id="genResumen" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:120px; font-size:1rem;" placeholder="Pegar análisis..."></textarea>
+      </div>
+
+      <div class="form-group" style="margin-bottom:1.5rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md);">
+        <h3 style="margin-bottom:1rem; font-size:1.2rem; color:var(--text-main);">Módulo 1 Recomendado <span style="color:red">*</span></h3>
+        <input type="text" id="genMod1Title" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem; margin-bottom:0.8rem;" placeholder="Título del Módulo (Ej: Descubre la IA para tu negocio)">
+        <textarea id="genMod1Desc" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:80px; font-size:1rem;" placeholder="Contenido o puntos clave del módulo..."></textarea>
+      </div>
+
+      <div class="form-group" style="margin-bottom:1.5rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md);">
+        <h3 style="margin-bottom:1rem; font-size:1.2rem; color:var(--text-main);">Módulo 2 Recomendado <span style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">(Opcional)</span></h3>
+        <input type="text" id="genMod2Title" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem; margin-bottom:0.8rem;" placeholder="Título del Módulo">
+        <textarea id="genMod2Desc" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:80px; font-size:1rem;" placeholder="Contenido o puntos clave del módulo..."></textarea>
+      </div>
+
+      <div class="form-group" style="margin-bottom:2rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md);">
+        <h3 style="margin-bottom:1rem; font-size:1.2rem; color:var(--text-main);">Módulo 3 Recomendado <span style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">(Opcional)</span></h3>
+        <input type="text" id="genMod3Title" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem; margin-bottom:0.8rem;" placeholder="Título del Módulo">
+        <textarea id="genMod3Desc" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:80px; font-size:1rem;" placeholder="Contenido o puntos clave del módulo..."></textarea>
       </div>
 
       <button onclick="generarEnlace()" style="width:100%; background:var(--text-main); color:white; padding:1.2rem; border:none; border-radius:var(--radius-sm); font-weight:600; cursor:pointer; font-size:1.1rem; margin-bottom:1.5rem; transition: background 0.3s;">🚀 Generar Enlace Mágico</button>
@@ -130,19 +157,36 @@
 
   <script>
     function generarEnlace() {
-      const empresa = document.getElementById('genEmpresa').value;
-      const precio = document.getElementById('genPrecio').value;
-      const texto = document.getElementById('genTexto').value;
+      const empresa = document.getElementById('genEmpresa').value.trim();
+      const precio = document.getElementById('genPrecio').value.trim();
+      const subtitulo = document.getElementById('genSubtitulo').value.trim();
+      const formato = document.getElementById('genFormato').value.trim();
+      const resumen = document.getElementById('genResumen').value.trim();
+      
+      const mod1Title = document.getElementById('genMod1Title').value.trim();
+      const mod1Desc = document.getElementById('genMod1Desc').value.trim();
+      const mod2Title = document.getElementById('genMod2Title').value.trim();
+      const mod2Desc = document.getElementById('genMod2Desc').value.trim();
+      const mod3Title = document.getElementById('genMod3Title').value.trim();
+      const mod3Desc = document.getElementById('genMod3Desc').value.trim();
 
-      if(!empresa || !texto) {
-        alert("⚠️ Por favor, rellena al menos el Nombre de la Empresa y el Texto de la Propuesta.");
+      if(!empresa || !resumen || !mod1Title) {
+        alert("⚠️ Por favor, rellena al menos el Nombre de la Empresa, el Resumen y el Módulo 1.");
         return;
       }
+
+      const modulos = [];
+      if(mod1Title) modulos.push({titulo: mod1Title, desc: mod1Desc});
+      if(mod2Title) modulos.push({titulo: mod2Title, desc: mod2Desc});
+      if(mod3Title) modulos.push({titulo: mod3Title, desc: mod3Desc});
 
       const dataObj = {
         empresa: empresa,
         precio: precio || '1.200€',
-        texto: texto
+        subtitulo: subtitulo || 'Programa adaptado a sus necesidades',
+        formato: formato || 'Taller Práctico in-company',
+        resumen: resumen,
+        modulos: modulos
       };
 
       const jsonStr = JSON.stringify(dataObj);
