@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hub de Propuestas Comerciales | SeviAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      background-color: var(--surface);
+    }
+    .hub-container {
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+    .hub-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .hub-header img {
+      max-width: 180px;
+      margin-bottom: 2rem;
+    }
+    .hub-header h1 {
+      font-size: 2.2rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .proposal-card {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: block;
+      color: var(--text-main);
+      border-top: 3px solid var(--border-color);
+    }
+    .proposal-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-top-color: var(--primary);
+    }
+    .proposal-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .alert-box {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.5rem;
+      margin-bottom: 3rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hub-container">
+    <div class="hub-header">
+      <img src="assets/img/Vertical_Logo Rojo_Original_Sin_fondo.png" alt="SeviAI">
+      <h1>Panel de Control de Propuestas</h1>
+      <p style="color:var(--text-muted); font-size:1rem; font-family:'Roboto', sans-serif;">Gestor interno de dossiers interactivos para clientes.</p>
+    </div>
+
+    <div class="alert-box">
+      <strong>¿Qué es esta página?</strong> Esta página es solo para tu uso interno. Es tu "directorio" donde podrás ver todas las propuestas que vayas creando. A tus clientes NUNCA les enviarás esta página (index.html), sino el enlace directo a su propuesta específica (plantilla_propuesta.html).
+    </div>
+
+    <div class="grid-2">
+      <a href="plantilla_catalogo.html" class="proposal-card" style="border-top-color: #4b5563;">
+        <h3>Catálogo Genérico</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;">Enlace para enviar en frío</p>
+        <span class="card-badge" style="background:var(--border-color); color:var(--text-main);">Captación</span>
+      </a>
+
+      <!-- Ejemplo de enlace a la plantilla -->
+      <a href="plantilla_propuesta.html" class="proposal-card">
+        <h3>Demo Empresa S.L.</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;">Programa de Formación en IA</p>
+        <span class="card-badge badge-hacer">Borrador</span>
+      </a>
+
+      <!-- Placeholder para añadir nuevas propuestas -->
+      <div class="proposal-card" style="border: 1px dashed var(--border-color); background:transparent; cursor:pointer;" onclick="alert('Instrucciones: Duplica el archivo plantilla_propuesta.html (por ejemplo: hotel_xyz.html) y edita su archivo de configuración config.js')">
+        <div style="font-size: 2rem; color:var(--text-muted); margin-bottom: 1rem;">+</div>
+        <h3 style="color:var(--text-main);">Nueva Propuesta</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Crear desde plantilla base</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

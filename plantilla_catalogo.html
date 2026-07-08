@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Formación en IA | SeviAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="dashboard">
+    <!-- Sidebar Navegación -->
+    <aside class="sidebar">
+      <div class="brand">
+        <!-- Logo horizontal oficial -->
+        <img src="assets/img/SeviAI-asesoría y formación_horizontal_sin_fondo.png" alt="SeviAI Asesoría y Formación">
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#" class="nav-item active">Áreas de Formación</a>
+        <a href="#equipo" class="nav-item">Facilitación</a>
+        <a href="#metodologia" class="nav-item">Metodología</a>
+        <a href="#diagnostico-final" class="nav-item">Diagnóstico</a>
+      </nav>
+
+      <div class="client-info">
+        <img src="assets/img/Vertical_Logo Rojo_Original_Sin_fondo.png" alt="SeviAI Logo" id="clientAvatar" class="client-avatar" style="object-fit:contain; padding:2px;">
+        <div class="client-details">
+          <h4>Área Empresas</h4>
+          <p>Catálogo General</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+      
+      <!-- Hero Propuesta con Video/Imagen de fondo -->
+      <section class="hero">
+        <video autoplay muted loop playsinline class="hero-video-bg" poster="assets/img/Loop copia.jpg">
+          <source src="assets/img/video-formación.mov" type="video/mp4">
+        </video>
+        <div class="hero-content">
+          <div class="hero-badge">INTELIGENCIA ARTIFICIAL PRÁCTICA</div>
+          <h1>Transforma tu empresa con IA de forma segura y ética.</h1>
+          <p>Descubre nuestros módulos formativos B2B. Adaptamos el contenido, la duración y la profundidad al nivel de madurez de tu equipo.</p>
+        </div>
+      </section>
+
+      <!-- Banner Diagnóstico (Cualificador) -->
+      <div class="diagnostic-banner">
+        <div class="diagnostic-text">
+          <h3>Evaluación de Madurez Gratuita</h3>
+          <p>Realiza un autodiagnóstico rápido (2 min) y nuestra IA estructurará una propuesta de módulos y presupuesto adaptada a tus necesidades reales.</p>
+        </div>
+        <button class="btn btn-primary" id="btnOpenDiagnostic" style="font-size: 1rem; padding: 1rem 1.5rem;">
+          Iniciar Diagnóstico
+        </button>
+      </div>
+
+      <!-- Módulos Formativos Estándar -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Módulos Formativos Disponibles</h2>
+        </div>
+        
+        <div class="grid-2">
+          <!-- Modulos estáticos genéricos para el catálogo -->
+          <div class="card">
+            <div class="card-badge badge-hacer">Nivel 1</div>
+            <h3 class="card-title">Descubre la IA para tu negocio</h3>
+            <p class="card-desc">Comprender los conceptos básicos de IA, identificar áreas de aplicación en la empresa y aprender los primeros pasos seguros.</p>
+          </div>
+          <div class="card">
+            <div class="card-badge badge-hacer">Nivel 2</div>
+            <h3 class="card-title">ChatGPT y LLMs: A la práctica</h3>
+            <p class="card-desc">Ingeniería de prompts eficaz, integración con el trabajo diario y creación de asistentes especializados (GPTs).</p>
+          </div>
+          <div class="card">
+            <div class="card-badge badge-hacer">Nivel 3</div>
+            <h3 class="card-title">Automatización de Procesos</h3>
+            <p class="card-desc">Detectar procesos automatizables en departamentos clave, uso de herramientas visuales (Make/Zapier) y estimación de ROI.</p>
+          </div>
+          <div class="card">
+            <div class="card-badge badge-hacer">Directivos</div>
+            <h3 class="card-title">Gobernanza y Ley Europea de IA</h3>
+            <p class="card-desc">Cumplimiento con RGPD, alfabetización exigida por la normativa y diseño del plan de adopción interno.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Equipo Facilitador -->
+      <section class="section" id="equipo">
+        <div class="section-header">
+          <h2 class="section-title">Facilitación</h2>
+        </div>
+        <div class="facilitator">
+          <img src="assets/img/rocio.JPG" alt="Rocío Cano">
+          <div class="facilitator-info">
+            <h3>Rocío Cano Fernández-Piedra</h3>
+            <p style="text-transform:uppercase; letter-spacing:0.5px; margin-bottom: 1rem; color:var(--primary); font-size:0.8rem; font-weight:600;">Consultora y Formadora en Inteligencia Artificial</p>
+            <p>Especialista en transformación digital con rostro humano. +15 años liderando equipos. Experta en adopción ética de IA y formación bonificada FUNDAE. Su enfoque es práctico, cercano y enfocado en la aplicación real en el negocio sin tecnicismos innecesarios.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Diagnostico Final -->
+      <section class="section" id="diagnostico-final">
+        <div class="section-header">
+          <h2 class="section-title">Elabora tu Propuesta a Medida</h2>
+        </div>
+        
+        <div style="background:var(--bg-color); padding: 2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <div class="card-badge" style="background:var(--text-main); color:white; margin-bottom:0.5rem;">Cien por Cien a Medida</div>
+            <h3 style="font-size: 1.5rem; color:var(--text-main);">Presupuesto dinámico</h3>
+            <p style="color:var(--text-muted); font-size:0.95rem; max-width:500px; margin-top:0.5rem;">Todas nuestras formaciones son <strong>bonificables por FUNDAE</strong>. Completa el diagnóstico para recibir una propuesta con las horas y la inversión exacta adaptada a tu equipo.</p>
+          </div>
+          
+          <div>
+            <!-- Botón que abre el modal también -->
+            <button class="btn btn-primary" onclick="document.getElementById('diagnosticModal').classList.add('active');" style="font-size: 1.1rem; padding: 1rem 2rem;">Hacer Diagnóstico Ahora</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modal Formulario N8N -->
+  <div class="modal-overlay" id="diagnosticModal">
+    <div class="modal">
+      <button class="modal-close" id="btnCloseDiagnostic">✕</button>
+      <h2 style="margin-bottom: 0.5rem; font-size:1.5rem;">Evaluación de Madurez</h2>
+      <p style="color:var(--text-muted); margin-bottom: 2rem; font-size:0.9rem;">Las respuestas estructurarán el presupuesto final a medida.</p>
+      
+      <div id="formSuccess" class="success-message">
+        <strong>✓ Datos registrados.</strong> Nuestra IA está generando tu presupuesto. Lo revisaremos y te enviaremos el enlace a la brevedad.
+      </div>
+
+      <form id="diagnosticForm">
+        <div class="form-group">
+          <label class="form-label">Nombre del Responsable</label>
+          <input type="text" name="nombre" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Email Corporativo</label>
+          <input type="email" name="email" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Nombre de la Empresa</label>
+          <input type="text" name="empresa" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Nivel actual de IA en el equipo</label>
+          <select name="nivel_ia" class="form-control" required>
+            <option value="">Selecciona nivel</option>
+            <option value="nulo">Ninguno, partimos de cero</option>
+            <option value="basico">Uso esporádico (ChatGPT gratuito)</option>
+            <option value="intermedio">Uso diario por algunos empleados</option>
+            <option value="avanzado">Tenemos flujos automatizados</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Objetivo principal de la formación</label>
+          <textarea name="objetivo" class="form-control" rows="3" required placeholder="Ej: Queremos automatizar la atención al cliente, redactar mejores emails..."></textarea>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:1rem; margin-top:1.5rem;">
+          <button type="submit" class="btn btn-primary" style="width:100%;">
+            Solicitar Propuesta
+          </button>
+          <div class="loader" id="formLoader" style="display:none;"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Note: el app.js maneja el modal, webhook.js maneja el envio -->
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/webhook.js"></script>
+</body>
+</html>

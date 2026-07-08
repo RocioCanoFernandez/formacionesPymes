@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta Formativa | SeviAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="dashboard">
+    <!-- Sidebar Navegación -->
+    <aside class="sidebar">
+      <div class="brand">
+        <!-- Logo horizontal oficial -->
+        <img src="assets/img/SeviAI-asesoría y formación_horizontal_sin_fondo.png" alt="SeviAI Asesoría y Formación">
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#" class="nav-item active">Itinerario</a>
+        <a href="#equipo" class="nav-item">Equipo</a>
+        <a href="#metodologia" class="nav-item">Metodología</a>
+        <a href="#inversion" class="nav-item">Inversión</a>
+      </nav>
+
+      <div class="client-info">
+        <img src="" alt="Logo Cliente" id="clientAvatar" class="client-avatar">
+        <div class="client-details">
+          <h4 id="clientName">Cargando...</h4>
+          <p id="clientSector">Cargando...</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+      
+      <!-- Hero Propuesta con Video/Imagen de fondo -->
+      <section class="hero">
+        <video autoplay muted loop playsinline class="hero-video-bg" poster="assets/img/Loop copia.jpg">
+          <source src="assets/img/video-formación.mov" type="video/mp4">
+        </video>
+        <div class="hero-content">
+          <div class="hero-badge" id="heroBadge">--</div>
+          <h1 id="heroTitle">Cargando propuesta...</h1>
+          <p id="heroSubtitle">--</p>
+        </div>
+      </section>
+
+      <!-- Módulos Formativos -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Itinerario A Medida</h2>
+        </div>
+        
+        <div class="grid-2" id="modulesContainer">
+          <!-- Inyectado vía JS -->
+        </div>
+      </section>
+
+      <!-- Equipo Facilitador -->
+      <section class="section" id="equipo">
+        <div class="section-header">
+          <h2 class="section-title">Facilitación</h2>
+        </div>
+        <div class="facilitator">
+          <img src="assets/img/rocio.JPG" alt="Rocío Cano">
+          <div class="facilitator-info">
+            <h3>Rocío Cano Fernández-Piedra</h3>
+            <p style="text-transform:uppercase; letter-spacing:0.5px; margin-bottom: 1rem; color:var(--primary); font-size:0.8rem; font-weight:600;">Consultora y Formadora en Inteligencia Artificial</p>
+            <p>Especialista en transformación digital con rostro humano. +15 años liderando equipos. Experta en adopción ética de IA y formación bonificada FUNDAE. Su enfoque es práctico, cercano y enfocado en la aplicación real en el negocio sin tecnicismos innecesarios.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Metodología y Beneficios -->
+      <section class="section" id="metodologia">
+        <div class="section-header">
+          <h2 class="section-title">Valor Aportado</h2>
+        </div>
+        <ul class="card-list" id="benefitsContainer" style="font-size: 1rem; color: var(--text-muted);">
+          <!-- Inyectado vía JS -->
+        </ul>
+      </section>
+
+      <!-- Inversión -->
+      <section class="section" id="inversion">
+        <div class="section-header">
+          <h2 class="section-title">Inversión del Programa</h2>
+        </div>
+        
+        <div style="background:var(--bg-color); padding: 2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <div id="fundaeBadge" class="card-badge" style="background:var(--text-main); color:white; margin-bottom:0.5rem;">Bonificable FUNDAE</div>
+            <h3 style="font-size: 2.5rem; color:var(--primary); font-family:'Roboto', sans-serif;" id="priceBase">--</h3>
+            <p id="priceNotes" style="color:var(--text-muted); font-size:0.85rem; max-width:400px; margin-top:0.5rem;">--</p>
+          </div>
+          
+          <div>
+            <!-- Call to action para cerrar la venta -->
+            <a href="https://calendly.com/seviai" target="_blank" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">Agendar Reunión de Inicio</a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
