@@ -1,12 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Cargar datos dinámicos desde configCliente solo si estamos en la plantilla de propuesta
-  if (typeof configCliente !== 'undefined' && document.getElementById('clientName')) {
+  // --- INICIO MAGIA ---
+  // Comprobar si hay un "Enlace Mágico" con datos incrustados en la URL
+  const hashStr = window.location.hash;
+  let magicData = null;
+  if(hashStr && hashStr.startsWith('#data=')) {
+    try {
+      const base64Str = hashStr.replace('#data=', '');
+      const decodedStr = decodeURIComponent(atob(base64Str));
+      magicData = JSON.parse(decodedStr);
+    } catch(e) {
+      console.error("Error desencriptando el enlace mágico:", e);
+    }
+  }
+
+  // Cargar datos dinámicos
+  if (magicData && document.getElementById('clientName')) {
+    // Si venimos de un enlace mágico, clonamos la configuración base (si existe) y la sobrescribimos
+    let configOverride = typeof configCliente !== 'undefined' ? JSON.parse(JSON.stringify(configCliente)) : {
+      cliente: {nombre: "", logo_url: "https://ui-avatars.com/api/?name=Cliente", sector: "Empresa"},
+      propuesta: {titulo: "Programa de Formación en IA", subtitulo: "Adaptado a las necesidades de la empresa", fecha: new Date().getFullYear(), formato: "Consultoría y Formación"},
+      modulos: [], beneficios: [], inversion: {precio_base: "", notas: "", bonificable_fundae: true}
+    };
+    
+    configOverride.cliente.nombre = magicData.empresa;
+    // Generar avatar dinámico con las iniciales de la empresa
+    configOverride.cliente.logo_url = "https://ui-avatars.com/api/?name=" + encodeURIComponent(magicData.empresa) + "&background=F2F2F2&color=D80F2C";
+    configOverride.inversion.precio_base = magicData.precio;
+    
+    // Inyectar el texto libre de la IA como un módulo principal
+    // Usamos regex para respetar los saltos de línea del texto de la IA
+    const textoFormateado = magicData.texto.replace(/\n/g, '<br><br>').replace(/- /g, '• ');
+    
+    configOverride.modulos = [{
+      titulo: "Análisis y Plan de Acción",
+      tipo: "Hacer",
+      duracion: "A medida",
+      descripcion: textoFormateado,
+      puntos_clave: []
+    }];
+    
+    populateDashboard(configOverride);
+    
+    // Limpiamos la URL para que no se vea el chorizo largo arriba (opcional pero estético)
+    window.history.replaceState(null, null, ' '); 
+
+  } else if (typeof configCliente !== 'undefined' && document.getElementById('clientName')) {
     populateDashboard(configCliente);
   } else if (!document.getElementById('clientName')) {
     console.log('Modo catálogo: No se requiere config.js para poblar datos.');
   } else {
     console.error('No se ha encontrado la configuración del cliente.');
   }
+  // --- FIN MAGIA ---
 
   // Manejo del Modal
   const modal = document.getElementById('diagnosticModal');
