@@ -89,42 +89,41 @@
       </a>
 
       <!-- Placeholder para añadir nuevas propuestas -->
-      <div class="proposal-card" style="border: 1px dashed var(--border-color); background:transparent; cursor:pointer;" onclick="document.getElementById('generatorModal').style.display='flex'">
+      <div class="proposal-card" style="border: 1px dashed var(--border-color); background:transparent; cursor:pointer;" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">
         <div style="font-size: 2rem; color:var(--text-muted); margin-bottom: 1rem;">+</div>
         <h3 style="color:var(--text-main);">Nueva Propuesta</h3>
-        <p style="color:var(--text-muted); font-size:0.9rem;">Generar Enlace Mágico</p>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Ir al Generador (abajo)</p>
       </div>
     </div>
-  </div>
 
-  <!-- Modal Generador Visual -->
-  <div class="modal-overlay" id="generatorModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); align-items:center; justify-content:center; z-index:9999;">
-    <div style="background:var(--bg-color); width:90%; max-width:600px; padding:2rem; border-radius:var(--radius-md); box-shadow:var(--shadow-lg); max-height:90vh; overflow-y:auto; position:relative;">
-      <button onclick="document.getElementById('generatorModal').style.display='none'" style="position:absolute; right:1.5rem; top:1.5rem; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text-muted);">✕</button>
-      <h2 style="margin-bottom:0.5rem; font-size:1.5rem; color:var(--text-main);">Generador de Enlace Mágico</h2>
-      <p style="color:var(--text-muted); margin-bottom:2rem; font-size:0.9rem;">Pega aquí el texto de la IA para crear el enlace automático.</p>
+    <!-- Generador Visual Integrado (Siempre visible) -->
+    <div id="generatorSection" style="margin-top: 4rem; background:var(--bg-color); padding:2.5rem; border-radius:var(--radius-md); box-shadow:var(--shadow-md); border-top: 4px solid var(--primary);">
+      <h2 style="margin-bottom:0.5rem; font-size:1.8rem; color:var(--text-main);">✨ Generador de Enlaces Mágicos</h2>
+      <p style="color:var(--text-muted); margin-bottom:2rem; font-size:1rem;">Pega aquí el texto del correo de la IA para crear el enlace interactivo al instante.</p>
       
-      <div class="form-group" style="margin-bottom:1.5rem;">
-        <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nombre de la Empresa</label>
-        <input type="text" id="genEmpresa" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit;" placeholder="Ej: Coca Cola">
+      <div class="grid-2" style="margin-bottom: 1.5rem; gap: 1.5rem;">
+        <div class="form-group">
+          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nombre de la Empresa</label>
+          <input type="text" id="genEmpresa" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: Coca Cola">
+        </div>
+        <div class="form-group">
+          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Inversión (Precio)</label>
+          <input type="text" id="genPrecio" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: 1.200€">
+        </div>
       </div>
 
       <div class="form-group" style="margin-bottom:1.5rem;">
-        <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Inversión (Precio)</label>
-        <input type="text" id="genPrecio" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit;" placeholder="Ej: 1.200€">
+        <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Texto de la Propuesta (Copiado del email)</label>
+        <textarea id="genTexto" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:200px; font-size:1rem;" placeholder="Pega aquí el análisis y recomendación de la IA..."></textarea>
       </div>
 
-      <div class="form-group" style="margin-bottom:1.5rem;">
-        <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Texto de la Propuesta (Pegar desde email)</label>
-        <textarea id="genTexto" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:150px;" placeholder="Pega aquí el análisis y recomendación de módulos..."></textarea>
-      </div>
+      <button onclick="generarEnlace()" style="width:100%; background:var(--text-main); color:white; padding:1.2rem; border:none; border-radius:var(--radius-sm); font-weight:600; cursor:pointer; font-size:1.1rem; margin-bottom:1.5rem; transition: background 0.3s;">🚀 Generar Enlace Mágico</button>
 
-      <button onclick="generarEnlace()" style="width:100%; background:var(--primary); color:white; padding:1rem; border:none; border-radius:var(--radius-sm); font-weight:600; cursor:pointer; font-size:1rem; margin-bottom:1.5rem;">✨ Generar Enlace Mágico</button>
-
-      <div id="linkResult" style="display:none; background:var(--surface); padding:1rem; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
-        <p style="font-weight:600; margin-bottom:0.5rem; font-size:0.9rem;">Enlace listo para enviar:</p>
-        <input type="text" id="generatedLink" readonly style="width:100%; padding:0.5rem; background:var(--bg-color); border:1px solid #ddd; margin-bottom:0.5rem;" onclick="this.select()">
-        <p style="font-size:0.8rem; color:var(--text-muted);">Cópialo y envíaselo al cliente. ¡No tienes que subir nada al servidor!</p>
+      <div id="linkResult" style="display:none; background:var(--primary-light); padding:1.5rem; border-radius:var(--radius-sm); border:2px dashed var(--primary);">
+        <p style="font-weight:600; margin-bottom:0.8rem; font-size:1.1rem; color:var(--text-main);">✅ ¡Enlace listo para enviar!</p>
+        <input type="text" id="generatedLink" readonly style="width:100%; padding:1rem; background:white; border:1px solid #ddd; margin-bottom:0.8rem; font-size:1rem; border-radius: 4px; cursor:copy;" onclick="this.select(); document.execCommand('copy'); alert('¡Enlace copiado al portapapeles!');">
+        <p style="font-size:0.9rem; color:var(--text-muted);">Haz clic en el enlace para copiarlo y envíaselo al cliente por WhatsApp o email.</p>
+        <a id="testLink" href="#" target="_blank" style="display:inline-block; margin-top:1rem; color:var(--primary); font-weight:600; text-decoration:none;">👀 Abrir propuesta para revisarla &rarr;</a>
       </div>
     </div>
   </div>
@@ -136,22 +135,19 @@
       const texto = document.getElementById('genTexto').value;
 
       if(!empresa || !texto) {
-        alert("Rellena al menos la empresa y el texto.");
+        alert("⚠️ Por favor, rellena al menos el Nombre de la Empresa y el Texto de la Propuesta.");
         return;
       }
 
-      // Comprimimos los datos
       const dataObj = {
         empresa: empresa,
         precio: precio || '1.200€',
         texto: texto
       };
 
-      // Base64 encode safe for URL
       const jsonStr = JSON.stringify(dataObj);
       const encoded = btoa(encodeURIComponent(jsonStr));
 
-      // Creamos la URL absoluta
       let baseUrl = window.location.href.split('?')[0].split('#')[0];
       baseUrl = baseUrl.replace('index.html', '');
       if(!baseUrl.endsWith('/')) baseUrl += '/';
@@ -159,7 +155,11 @@
       const finalLink = baseUrl + 'plantilla_propuesta.html#data=' + encoded;
 
       document.getElementById('generatedLink').value = finalLink;
+      document.getElementById('testLink').href = finalLink;
       document.getElementById('linkResult').style.display = 'block';
+      
+      // Scroll smoothly down to the result
+      window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
     }
   </script>
 </body>
