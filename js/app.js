@@ -38,16 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
       "Soporte continuo de dudas durante 30 días"
     ];
 
-    // Formatear Resumen inicial como el primer módulo (Saber)
+    // Formatear Resumen inicial
     const resumenFormateado = (magicData.resumen || magicData.texto || "").replace(/\n/g, '<br><br>').replace(/- /g, '• ');
     
-    configOverride.modulos = [{
-      titulo: "Análisis y Plan de Acción",
-      tipo: "Saber",
-      duracion: "Fase 1",
-      descripcion: resumenFormateado,
-      puntos_clave: []
-    }];
+    configOverride.resumen = resumenFormateado;
+    configOverride.modulos = [];
 
     // Añadir los módulos opcionales (Hacer)
     if(magicData.modulos && magicData.modulos.length > 0) {
@@ -114,9 +109,16 @@ function populateDashboard(data) {
   document.getElementById('heroTitle').textContent = data.propuesta.titulo;
   document.getElementById('heroSubtitle').textContent = data.propuesta.subtitulo;
 
+  // Rellenar Resumen
+  const resumenContainer = document.getElementById('resumenContainer');
+  if (resumenContainer && data.resumen) {
+    resumenContainer.innerHTML = data.resumen;
+  }
+
   // Rellenar Módulos
   const modulesContainer = document.getElementById('modulesContainer');
-  modulesContainer.innerHTML = '';
+  if (modulesContainer) {
+    modulesContainer.innerHTML = '';
   
   data.modulos.forEach(mod => {
     let badgeClass = '';
@@ -138,6 +140,7 @@ function populateDashboard(data) {
     `;
     modulesContainer.insertAdjacentHTML('beforeend', modHTML);
   });
+  }
 
   // Rellenar Beneficios
   const benefitsContainer = document.getElementById('benefitsContainer');
