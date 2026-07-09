@@ -217,23 +217,25 @@
       let precios = [];
       
       if (modalidad === 'Online' || modalidad === 'Ambas') {
+        const precioOnline = horas * 70;
         precios.push({
           tipo: 'Online (Aula Virtual)',
-          precio: (horas * 70),
+          precio: precioOnline,
           desc: 'Formación bonificable a través de los créditos de FUNDAE.',
-          fundae: fundaeMax,
+          fundae: Math.min(precioOnline, fundaeMax),
           badge: modalidad === 'Ambas' ? 'OPCIÓN ONLINE' : 'BONIFICABLE FUNDAE'
         });
       }
       
       if (modalidad === 'In-company' || modalidad === 'Ambas') {
+        const precioInCompany = horas * 85;
         let textInCompany = (suplemento > 0) ? `Incluye suplemento por desplazamiento. Formación bonificable a través de los créditos de FUNDAE.` : `Coste sin desplazamiento adicional (Zona 0). Formación bonificable a través de FUNDAE.`;
         if (zonaVal === 'custom') textInCompany = "Desplazamiento sujeto a presupuesto a medida. Bonificable por FUNDAE.";
         precios.push({
           tipo: 'Presencial (In-company)',
-          precio: (horas * 85) + suplemento,
+          precio: precioInCompany + suplemento,
           desc: textInCompany,
-          fundae: fundaeMax,
+          fundae: Math.min(precioInCompany, fundaeMax),
           badge: modalidad === 'Ambas' ? 'OPCIÓN IN-COMPANY' : 'BONIFICABLE FUNDAE'
         });
       }
