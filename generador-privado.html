@@ -63,7 +63,33 @@
 </head>
 <body>
 
-  <div class="hub-container">
+  <div id="passwordOverlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:var(--surface); z-index:9999; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+    <img src="assets/img/Vertical_Logo Rojo_Original_Sin_fondo.png" alt="SeviAI" style="max-width:150px; margin-bottom:2rem;">
+    <h2 style="color:var(--text-main); margin-bottom:1rem;">Panel de Acceso Restringido</h2>
+    <div style="background:var(--bg-color); padding:2rem; border-radius:var(--radius-md); border:1px solid var(--border-color); box-shadow:var(--shadow-md); width:100%; max-width:400px; text-align:center;">
+      <input type="password" id="passInput" placeholder="Contraseña secreta..." style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); margin-bottom:1rem; font-size:1rem;">
+      <button onclick="checkPassword()" style="width:100%; background:var(--text-main); color:white; padding:1rem; border:none; border-radius:var(--radius-sm); font-weight:600; cursor:pointer; font-size:1rem;">Desbloquear Panel</button>
+      <p id="passError" style="color:#ef4444; margin-top:1rem; display:none; font-weight:600;">Contraseña incorrecta</p>
+    </div>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById('passInput').value;
+      if (input === 'SeviAI2026') { 
+        document.getElementById('passwordOverlay').style.display = 'none';
+      } else {
+        document.getElementById('passError').style.display = 'block';
+      }
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('passInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          checkPassword();
+        }
+      });
+    });
+  </script>  <div class="hub-container">
     <div class="hub-header">
       <img src="assets/img/Vertical_Logo Rojo_Original_Sin_fondo.png" alt="SeviAI">
       <h1>Panel de Control de Propuestas</h1>
@@ -250,20 +276,53 @@
       };
 
       const jsonStr = JSON.stringify(dataObj);
-      const encoded = btoa(encodeURIComponent(jsonStr));
+
+      // Rocío: Cambia esto por la URL del Webhook POST que crees en n8n
+      const n8nWebhookPost = 'URL_DEL_WEBHOOK_POST_DE_N8N';
 
       let baseUrl = window.location.href.split('?')[0].split('#')[0];
       baseUrl = baseUrl.replace('generador-privado.html', '');
       if(!baseUrl.endsWith('/')) baseUrl += '/';
-      
-      const finalLink = baseUrl + 'plantilla_propuesta.html#data=' + encoded;
 
-      document.getElementById('generatedLink').value = finalLink;
-      document.getElementById('testLink').href = finalLink;
-      document.getElementById('linkResult').style.display = 'block';
-      
-      // Scroll smoothly down to the result
-      window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+      if (n8nWebhookPost === 'URL_DEL_WEBHOOK_POST_DE_N8N') {
+        // Fallback a Base64 si aún no has configurado n8n
+        const encoded = btoa(encodeURIComponent(jsonStr));
+        const finalLink = baseUrl + 'plantilla_propuesta.html#data=' + encoded;
+        mostrarResultado(finalLink);
+      } else {
+        // Enviar datos a n8n
+        const btn = document.querySelector('button[onclick="generarEnlace()"]');
+        const textOrig = btn.innerText;
+        btn.innerText = '⏳ Guardando propuesta en la base de datos...';
+        
+        fetch(n8nWebhookPost, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: jsonStr
+        })
+        .then(res => res.json())
+        .then(data => {
+          btn.innerText = textOrig;
+          if(!data.id) throw new Error("n8n no devolvió un ID");
+          const finalLink = baseUrl + 'plantilla_propuesta.html?id=' + data.id;
+          mostrarResultado(finalLink);
+        })
+        .catch(err => {
+          btn.innerText = textOrig;
+          console.error(err);
+          alert("Error conectando con n8n. Se usará el enlace largo temporalmente.");
+          const encoded = btoa(encodeURIComponent(jsonStr));
+          const finalLink = baseUrl + 'plantilla_propuesta.html#data=' + encoded;
+          mostrarResultado(finalLink);
+        });
+      }
+
+      function mostrarResultado(finalLink) {
+        document.getElementById('generatedLink').value = finalLink;
+        document.getElementById('testLink').href = finalLink;
+        document.getElementById('linkResult').style.display = 'block';
+        window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+      }
     }
   </script>
 </body>
