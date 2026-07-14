@@ -61,5 +61,5 @@ const configCliente = {
     "bonificable_fundae": true,
     "notas": "Formación 100% bonificable a través de los créditos de FUNDAE."
   },
-  "webhook_n8n": "https://n8n-n8n.npfusf.easypanel.host/webhook/guardar-propuesta"
+  "webhook_n8n": "https://n8n-n8n.npfusf.easypanel.host/webhook/guardar-propuesta-publico"
 };
