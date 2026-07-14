@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (proposalId) {
     // 1. Cargar desde Base de Datos (n8n Webhook GET)
     // Rocío, cambia esta URL por la del webhook GET que crees en n8n
-    const webhookGetUrl = 'URL_DEL_WEBHOOK_GET_DE_N8N';
+    const webhookGetUrl = 'https://n8n-n8n.npfusf.easypanel.host/webhook/ver-propuesta';
     
     if (webhookGetUrl === 'URL_DEL_WEBHOOK_GET_DE_N8N') {
       alert("Aviso: Aún no has configurado el Webhook GET de n8n en app.js");
