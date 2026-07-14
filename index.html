@@ -3,268 +3,384 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hub de Propuestas Comerciales | SeviAI</title>
+  <title>Catálogo de Formación en IA | SeviAI</title>
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-    body {
-      background-color: var(--surface);
-    }
-    .hub-container {
-      max-width: 1000px;
-      margin: 4rem auto;
-      padding: 0 2rem;
-    }
-    .hub-header {
-      text-align: center;
-      margin-bottom: 4rem;
-    }
-    .hub-header img {
-      max-width: 180px;
-      margin-bottom: 2rem;
-    }
-    .hub-header h1 {
-      font-size: 2.2rem;
-      color: var(--text-main);
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .proposal-card {
-      background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: block;
-      color: var(--text-main);
-      border-top: 3px solid var(--border-color);
-    }
-    .proposal-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-      border-top-color: var(--primary);
-    }
-    .proposal-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-    .alert-box {
-      background: var(--primary-light);
-      border-left: 4px solid var(--primary);
-      padding: 1rem 1.5rem;
-      margin-bottom: 3rem;
-      border-radius: var(--radius-md);
-      font-size: 0.9rem;
-      color: var(--text-main);
-    }
-  </style>
 </head>
 <body>
 
-  <div class="hub-container">
-    <div class="hub-header">
-      <img src="assets/img/Vertical_Logo Rojo_Original_Sin_fondo.png" alt="SeviAI">
-      <h1>Panel de Control de Propuestas</h1>
-      <p style="color:var(--text-muted); font-size:1rem; font-family:'Roboto', sans-serif;">Gestor interno de dossiers interactivos para clientes.</p>
-    </div>
-
-    <div class="alert-box">
-      <strong>¿Qué es esta página?</strong> Esta página es solo para tu uso interno. Es tu "directorio" donde podrás ver todas las propuestas que vayas creando. A tus clientes NUNCA les enviarás esta página (index.html), sino el enlace directo a su propuesta específica (plantilla_propuesta.html).
-    </div>
-
-    <div class="grid-2">
-      <a href="plantilla_catalogo.html" class="proposal-card" style="border-top-color: #4b5563;">
-        <h3>Catálogo Genérico</h3>
-        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;">Enlace para enviar en frío</p>
-        <span class="card-badge" style="background:var(--border-color); color:var(--text-main);">Captación</span>
-      </a>
-
-
-      <!-- Placeholder para añadir nuevas propuestas -->
-      <div class="proposal-card" style="border: 1px dashed var(--border-color); background:transparent; cursor:pointer;" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">
-        <div style="font-size: 2rem; color:var(--text-muted); margin-bottom: 1rem;">+</div>
-        <h3 style="color:var(--text-main);">Nueva Propuesta</h3>
-        <p style="color:var(--text-muted); font-size:0.9rem;">Ir al Generador (abajo)</p>
+  <div class="dashboard">
+    <!-- Sidebar Navegación -->
+    <aside class="sidebar">
+      <div class="brand">
+        <!-- Logo horizontal oficial -->
+        <a href="https://seviai.es">
+          <img src="assets/img/SeviAI-asesoría y formación_horizontal_sin_fondo.png" alt="SeviAI Asesoría y Formación">
+        </a>
       </div>
-    </div>
 
-    <!-- Generador Visual Integrado (Siempre visible) -->
-    <div id="generatorSection" style="margin-top: 4rem; background:var(--bg-color); padding:2.5rem; border-radius:var(--radius-md); box-shadow:var(--shadow-md); border-top: 4px solid var(--primary);">
-      <h2 style="margin-bottom:0.5rem; font-size:1.8rem; color:var(--text-main);">✨ Generador de Enlaces Mágicos</h2>
-      <p style="color:var(--text-muted); margin-bottom:2rem; font-size:1rem;">Pega aquí el texto del correo de la IA para crear el enlace interactivo al instante.</p>
-      
-      <div class="grid-2" style="margin-bottom: 1.5rem; gap: 1.5rem;">
-        <div class="form-group">
-          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nombre de la Empresa <span style="color:red">*</span></label>
-          <input type="text" id="genEmpresa" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: Empresa S.L.">
+      <nav class="nav-menu">
+        <a href="#" class="nav-item active">Áreas de Formación</a>
+        <a href="#equipo" class="nav-item">Quién te acompaña</a>
+        <a href="#metodologia" class="nav-item">Metodología</a>
+        <a href="#diagnostico-final" class="nav-item">Diagnóstico</a>
+      </nav>
+
+      <div class="client-info">
+        <img src="assets/img/Vertical_Logo Rojo_Original_Sin_fondo.png" alt="SeviAI Logo" id="clientAvatar" class="client-avatar" style="object-fit:contain; padding:2px;">
+        <div class="client-details">
+          <h4>Área Empresas</h4>
+          <p>Catálogo General</p>
         </div>
-        <div class="form-group" style="grid-column: 1 / -1; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-          <h3 style="margin-bottom:1rem; font-size:1.2rem; color:var(--text-main);">Calculadora de Inversión y FUNDAE</h3>
-          <div class="grid-2" style="gap: 1rem;">
-            <div>
-              <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Modalidad de Presupuesto <span style="color:red">*</span></label>
-              <select id="genModalidad" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
-                <option value="Online">Solo Online (Aula Virtual)</option>
-                <option value="In-company">Solo Presencial (In-company)</option>
-                <option value="Ambas">Mostrar Ambas Opciones (Recomendado si el cliente duda)</option>
-              </select>
-            </div>
-            <div>
-              <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nº de Horas Totales <span style="color:red">*</span></label>
-              <input type="number" id="genHoras" min="1" value="4" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
-              <span style="font-size:0.8rem; color:var(--text-muted);">*FUNDAE exige un mínimo de 2 horas.</span>
-            </div>
-            <div>
-              <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nº de Alumnos <span style="color:red">*</span></label>
-              <input type="number" id="genAlumnos" min="1" value="5" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
-            </div>
-            <div>
-              <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Zona de Desplazamiento (In-company)</label>
-              <select id="genZona" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
-                <option value="0">Zona 0: Sevilla capital o hasta 30km (+0€)</option>
-                <option value="35">Zona 1: 31-60 km (+35€)</option>
-                <option value="65">Zona 2: 61-100 km (+65€)</option>
-                <option value="100">Zona 3: 101-150 km (+100€)</option>
-                <option value="custom">Zona 4: Más de 150 km (Consultar Coste)</option>
-              </select>
-            </div>
+      </div>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+      
+      <!-- Hero Propuesta con Video/Imagen de fondo -->
+      <section class="hero">
+        <video autoplay muted loop playsinline class="hero-video-bg" poster="assets/img/Loop copia.jpg">
+          <source src="assets/img/video-formación.mov" type="video/mp4">
+        </video>
+        <div class="hero-content">
+          <div class="hero-badge">INTELIGENCIA ARTIFICIAL PRÁCTICA</div>
+          <h1>Transforma tu empresa con IA de forma segura y ética.</h1>
+          <p>Descubre nuestros módulos formativos B2B. Adaptamos el contenido, la duración y la profundidad al nivel de madurez de tu equipo.</p>
+        </div>
+      </section>
+
+      <!-- Banner Diagnóstico (Cualificador) -->
+      <div class="diagnostic-banner">
+        <div class="diagnostic-text">
+          <h3>Evaluación de Madurez Digital Gratuita</h3>
+          <p>Realiza un autodiagnóstico rápido (2 min) y nuestra IA estructurará una propuesta de módulos y presupuesto adaptada a tus necesidades reales.</p>
+        </div>
+        <button class="btn btn-primary" id="btnOpenDiagnostic" style="font-size: 1rem; padding: 1rem 1.5rem;">
+          Iniciar Diagnóstico
+        </button>
+      </div>
+
+      <!-- Urgencia Legal (Ley IA) -->
+      <section class="section" style="background:var(--bg-color); border:1px solid var(--border-color); border-radius:var(--radius-md); padding: 3rem 2rem;">
+        <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+          <h2 style="font-size: 2rem; color:var(--text-main); margin-bottom: 1.5rem; text-align: center;">¿Por qué formar a tu equipo ya no es opcional?</h2>
+          <p style="font-size: 1.1rem; color:var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6;">El Gobierno español aprobó recientemente el Proyecto de Ley para el buen uso y la gobernanza de la Inteligencia Artificial, adaptando el marco nacional al <strong>Reglamento Europeo (AI Act)</strong>. La obligación de formar a los empleados <strong>ya está vigente</strong> por aplicación directa de su Artículo 4.</p>
+          
+          <div style="background:var(--primary-light); border-left:4px solid var(--primary); padding: 1.5rem; margin-bottom: 1.5rem; border-radius: 4px;">
+            <h4 style="color:var(--text-main); margin-bottom: 0.5rem; font-size: 1.1rem;">Artículo 4: Alfabetización Obligatoria</h4>
+            <p style="color:var(--text-muted); font-size: 0.95rem;">Si tus empleados utilizan herramientas comunes como ChatGPT, Copilot o soluciones similares, la empresa está legalmente obligada a adoptar medidas para garantizar que su personal cuente con un nivel suficiente de conocimientos sobre inteligencia artificial (límites, sesgos, confidencialidad y uso responsable).</p>
+          </div>
+          <p style="font-size: 1.1rem; color:var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6;">Esta normativa <strong>afecta a todas las empresas y pymes</strong> (responsables del despliegue), y exige formar a todo el personal (marketing, rrhh, ventas...) que utilice estas herramientas de forma habitual, enfrentándose a multas considerables en caso de incumplimiento.</p>
+        </div>
+      </section>
+
+      <!-- Módulos Formativos Estándar -->
+      <section class="section">
+        <div class="section-header">
+          <h2 class="section-title">Módulos Formativos Disponibles</h2>
+        </div>
+        
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-badge badge-saber">Nivel 1</div>
+            <h3 class="card-title">Descubre la IA para tu negocio</h3>
+            <p class="card-desc">Entender qué es la IA, qué puede hacer por una PYME y cómo empezar sin riesgo. Casos de uso reales y primeros pasos seguros.</p>
+          </div>
+          <div class="card">
+            <div class="card-badge badge-hacer">Nivel 2</div>
+            <h3 class="card-title">ChatGPT y LLMs: De cero a la práctica</h3>
+            <p class="card-desc">Ingeniería de prompts, cómo pedir mejores respuestas, creación de GPTs personalizados y uso en tareas diarias (emails, propuestas).</p>
+          </div>
+          <div class="card">
+            <div class="card-badge badge-hacer">Herramientas</div>
+            <h3 class="card-title">Copilot, Gemini y herramientas en el trabajo diario</h3>
+            <p class="card-desc">Copilot en Microsoft 365, Gemini en Google Workspace, NotebookLM. Comparativa práctica y buenas prácticas con datos sensibles.</p>
+          </div>
+          <div class="card">
+            <div class="card-badge badge-hacer">Automatización</div>
+            <h3 class="card-title">Automatización de procesos con IA</h3>
+            <p class="card-desc">Detección de procesos automatizables. Introducción a Make o Copilot Studio y cálculo de ROI.</p>
+          </div>
+          <div class="card">
+            <div class="card-badge badge-hacer">Comunicación</div>
+            <h3 class="card-title">Chatbots y asistentes virtuales</h3>
+            <p class="card-desc">Tipos de chatbots (web, atención interna). Cómo diseñar una conversación útil y riesgos a evitar.</p>
+          </div>
+          <div class="card">
+            <div class="card-badge badge-hacer">Marketing</div>
+            <h3 class="card-title">Marketing, redes y contenidos con IA</h3>
+            <p class="card-desc">Ideas de contenido, copies para LinkedIn/Instagram, calendarios editoriales y SEO.</p>
+          </div>
+          <div class="card">
+            <div class="card-badge badge-hacer">Creatividad</div>
+            <h3 class="card-title">Generación de imágenes y vídeo con IA</h3>
+            <p class="card-desc">Creación de piezas visuales para redes, edición visual, derechos de uso y coherencia visual.</p>
+          </div>
+          <div class="card">
+            <div class="card-badge badge-saber">Estrategia</div>
+            <h3 class="card-title">Plan estratégico de IA para directivos</h3>
+            <p class="card-desc">Priorización de casos de uso, cálculo de impacto, gestión del cambio y gobernanza.</p>
+          </div>
+          <div class="card">
+            <div class="card-badge badge-ser">Gobernanza</div>
+            <h3 class="card-title">Gobernanza, ética y Ley Europea de IA</h3>
+            <p class="card-desc">Uso responsable de IA, RGPD, alucinaciones, alfabetización exigida y políticas internas.</p>
+          </div>
+          <div class="card">
+            <div class="card-badge badge-ser">Departamentos</div>
+            <h3 class="card-title">Formación personalizada por departamentos</h3>
+            <p class="card-desc">Casos de uso específicos para Administración, Ventas, Marketing, RRHH, Dirección y Operaciones.</p>
           </div>
         </div>
-        <div class="form-group">
-          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Subtítulo Propuesta</label>
-          <input type="text" id="genSubtitulo" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: Programa adaptado a sus necesidades">
+      </section>
+
+      <!-- Equipo Facilitador -->
+      <section class="section" id="equipo">
+        <div class="section-header">
+          <h2 class="section-title">Quién te acompaña</h2>
         </div>
-        <div class="form-group">
-          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Etiqueta (Formato/Fecha)</label>
-          <input type="text" id="genFormato" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: Nov 2026 · Taller Presencial">
+        <div class="facilitator">
+          <img src="assets/img/rocio.JPG" alt="Rocío Cano">
+          <div class="facilitator-info">
+            <h3>Rocío Cano Fernández-Piedra</h3>
+            <p style="text-transform:uppercase; letter-spacing:0.5px; margin-bottom: 1rem; color:var(--primary); font-size:0.8rem; font-weight:600;">Fundadora de SeviAI y formadora especializada en IA</p>
+            <p style="margin-bottom:0.8rem;">Antes de dedicarme a la IA trabajé más de 15 años liderando equipos en hostelería y eventos. Eso me dio una visión muy clara: la tecnología solo tiene sentido si ayuda a las personas a trabajar mejor, ahorrar tiempo y tomar decisiones con más tranquilidad.</p>
+            <p style="margin-bottom:0.8rem;">Por eso mis formaciones no van de llenar una sala de tecnicismos. Van de aterrizar la IA en tareas reales: escribir mejores emails, automatizar procesos, organizar información o atender mejor a clientes.</p>
+            <p><strong>Mi objetivo no es que tu equipo salga diciendo "qué interesante". Mi objetivo es que salga diciendo "esto lo puedo usar mañana".</strong></p>
+          </div>
         </div>
+      </section>
+
+      <!-- Metodología -->
+      <section class="section" id="metodologia">
+        <div class="section-header">
+          <h2 class="section-title">Método SeviAI: aprender, aplicar y dejarlo funcionando</h2>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h3 class="card-title">1. Diagnóstico inicial</h3>
+            <p class="card-desc">Analizamos el nivel actual del equipo, las herramientas que ya utiliza la empresa y las tareas donde la IA puede aportar más valor.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">2. Diseño del itinerario</h3>
+            <p class="card-desc">No todas las empresas necesitan el mismo curso. Combinamos módulos según departamento, nivel, objetivos y tiempo disponible.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">3. Formación práctica</h3>
+            <p class="card-desc">Las sesiones se trabajan con ejemplos reales: emails, documentos, procesos, presupuestos o reuniones.</p>
+          </div>
+          <div class="card">
+            <h3 class="card-title">4. Aplicación guiada</h3>
+            <p class="card-desc">El equipo no solo escucha. Practica, prueba herramientas y aprende a crear sus propios flujos de trabajo.</p>
+          </div>
+          <div class="card span-2-desktop" style="background: var(--primary-light); border: 1px solid var(--primary);">
+            <h3 class="card-title" style="color:var(--primary);">5. Materiales y soporte</h3>
+            <p class="card-desc">Se entregan guías, plantillas, checklist y soporte posterior durante 30 días para que el aprendizaje no se quede en una sesión aislada.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reseñas -->
+      <section class="section" id="resenas">
+        <div class="section-header">
+          <h2 class="section-title">Lo que dicen empresas y alumnos</h2>
+        </div>
+        <div class="grid-2">
+          <!-- Reseña 1 -->
+          <div class="card" style="background:var(--bg-color);">
+            <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+              <div style="width:40px; height:40px; background:var(--primary); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem;">C</div>
+              <div>
+                <h4 style="margin:0; font-size:1rem; color:var(--text-main);">Carmen Rodriguez</h4>
+                <div style="color:#f59e0b; font-size:0.9rem;">★★★★★</div>
+              </div>
+            </div>
+            <p class="card-desc" style="font-size:0.95rem; font-style:italic;">"Rocío ha conseguido hacer fácil y cercano un tema tan amplio como la IA gracias a su forma de explicar, siempre clara, práctica y motivadora. Recomiendo contratar los servicios de SeviAI por la calidad de la formación. Sin duda, una excelente elección para empresas."</p>
+          </div>
+          <!-- Reseña 2 -->
+          <div class="card" style="background:var(--bg-color);">
+            <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+              <div style="width:40px; height:40px; background:var(--primary); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem;">M</div>
+              <div>
+                <h4 style="margin:0; font-size:1rem; color:var(--text-main);">Maria Eugenia Rodríguez</h4>
+                <div style="color:#f59e0b; font-size:0.9rem;">★★★★★</div>
+              </div>
+            </div>
+            <p class="card-desc" style="font-size:0.95rem; font-style:italic;">"Rocío es una gran profesional con un conocimiento profundo en la materia que despliega en cada clase su don de expresar de forma sencilla y clara lo que pareciera complejo. Se vuelca con cada explicación. Sin duda la recomiendo como formadora/consultora."</p>
+          </div>
+          <!-- Reseña 3 -->
+          <div class="card" style="background:var(--bg-color);">
+            <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+              <div style="width:40px; height:40px; background:var(--primary); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem;">A</div>
+              <div>
+                <h4 style="margin:0; font-size:1rem; color:var(--text-main);">Ana Arzadun</h4>
+                <div style="color:#f59e0b; font-size:0.9rem;">★★★★★</div>
+              </div>
+            </div>
+            <p class="card-desc" style="font-size:0.95rem; font-style:italic;">"Destaca por su enorme conocimiento de la IA y, sobre todo, por su capacidad para explicar conceptos complejos de una forma clara, práctica y fácil de entender. Su forma de enseñar hace que el aprendizaje resulte útil y realmente aplicable al día a día."</p>
+          </div>
+          <!-- Reseña 4 -->
+          <div class="card" style="background:var(--bg-color);">
+            <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+              <div style="width:40px; height:40px; background:var(--primary); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem;">S</div>
+              <div>
+                <h4 style="margin:0; font-size:1rem; color:var(--text-main);">Sergio Gutierrez</h4>
+                <div style="color:#f59e0b; font-size:0.9rem;">★★★★★</div>
+              </div>
+            </div>
+            <p class="card-desc" style="font-size:0.95rem; font-style:italic;">"Curso muy completo, impartido de manera magistral por Rocío, que sin duda es una experta en todo lo relacionado con IA. Estaríamos meses y seguiríamos aprendiendo de ella. Un placer haber compartido estas materias con una profesional así."</p>
+          </div>
+          <!-- Reseña 5 -->
+          <div class="card" style="background:var(--bg-color);">
+            <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+              <div style="width:40px; height:40px; background:var(--primary); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem;">H</div>
+              <div>
+                <h4 style="margin:0; font-size:1rem; color:var(--text-main);">Hayat Shammout Diaz</h4>
+                <div style="color:#f59e0b; font-size:0.9rem;">★★★★★</div>
+              </div>
+            </div>
+            <p class="card-desc" style="font-size:0.95rem; font-style:italic;">"Ha sido un auténtico placer asistir al curso. Me ha parecido muy útil, a la par de necesario, aprender a utilizar la Inteligencia Artificial de la mano de Rocío, una grandísima profesional, facilitando el aprendizaje haciéndolo muy ameno."</p>
+          </div>
+          <!-- Reseña 6 -->
+          <div class="card" style="background:var(--bg-color);">
+            <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+              <div style="width:40px; height:40px; background:var(--primary); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; font-size:1.2rem;">R</div>
+              <div>
+                <h4 style="margin:0; font-size:1rem; color:var(--text-main);">Raquel Lázaro Bono</h4>
+                <div style="color:#f59e0b; font-size:0.9rem;">★★★★★</div>
+              </div>
+            </div>
+            <p class="card-desc" style="font-size:0.95rem; font-style:italic;">"Qué gran descubrimiento el de Rocío Cano. Explica de forma sencilla y cercana haciendo que aprender IA resulte accesible y realmente útil. Lo que más valoro del curso es su gran conocimiento y claridad al explicar. Muy recomendable."</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Diagnostico Final -->
+      <section class="section" id="diagnostico-final">
+        <div class="section-header">
+          <h2 class="section-title">Elabora tu Propuesta a Medida</h2>
+        </div>
+        
+        <div style="background:var(--bg-color); padding: 2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <div class="card-badge" style="background:var(--text-main); color:white; margin-bottom:0.5rem;">Cien por Cien a Medida</div>
+            <h3 style="font-size: 1.5rem; color:var(--text-main);">Presupuesto dinámico</h3>
+            <p style="color:var(--text-muted); font-size:0.95rem; max-width:500px; margin-top:0.5rem;">Todas nuestras formaciones son <strong>bonificables por FUNDAE</strong>. Completa el diagnóstico para recibir una propuesta con las horas y la inversión exacta adaptada a tu equipo.</p>
+          </div>
+          
+          <div>
+            <!-- Botón que abre el modal también -->
+            <button class="btn btn-primary" onclick="document.getElementById('diagnosticModal').classList.add('active');" style="font-size: 1.1rem; padding: 1rem 2rem;">Hacer Diagnóstico Ahora</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modal Formulario N8N -->
+  <div class="modal-overlay" id="diagnosticModal">
+    <div class="modal">
+      <button class="modal-close" id="btnCloseDiagnostic">✕</button>
+      <h2 style="margin-bottom: 0.5rem; font-size:1.5rem;">Evaluación de Madurez Digital Gratuita</h2>
+      <p style="color:var(--text-muted); margin-bottom: 2rem; font-size:0.9rem;">Las respuestas estructurarán el presupuesto final a medida.</p>
+      
+      <div id="formSuccess" class="success-message">
+        <strong>✓ Datos registrados.</strong> Nuestra IA está generando tu presupuesto. Lo revisaremos y te enviaremos el enlace a la brevedad.
       </div>
 
-      <div class="form-group" style="margin-bottom:2rem; padding-bottom:1.5rem; border-bottom: 1px dashed var(--border-color);">
-        <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Resumen y Análisis de la IA <span style="color:red">*</span></label>
-        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">Copia aquí el diagnóstico inicial que te ha enviado la IA en el correo.</p>
-        <textarea id="genResumen" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:120px; font-size:1rem;" placeholder="Pegar análisis..."></textarea>
-      </div>
+      <form id="diagnosticForm">
+        <div class="form-group">
+          <label class="form-label">Nombre del Responsable</label>
+          <input type="text" name="nombre" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Email Corporativo</label>
+          <input type="email" name="email" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Nombre de la Empresa</label>
+          <input type="text" name="empresa" class="form-control" required>
+        </div>
 
-      <div class="form-group" style="margin-bottom:1.5rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md);">
-        <h3 style="margin-bottom:1rem; font-size:1.2rem; color:var(--text-main);">Módulo 1 Recomendado <span style="color:red">*</span></h3>
-        <input type="text" id="genMod1Title" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem; margin-bottom:0.8rem;" placeholder="Título del Módulo (Ej: Descubre la IA para tu negocio)">
-        <textarea id="genMod1Desc" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:80px; font-size:1rem;" placeholder="Contenido o puntos clave del módulo..."></textarea>
-      </div>
+        <div class="form-group">
+          <label class="form-label">Ubicación (Si prefieres presencial)</label>
+          <select name="zona" class="form-control" required>
+            <option value="">Selecciona tu zona de desplazamiento</option>
+            <option value="Zona 0">Zona 0: Sevilla capital o hasta 30km</option>
+            <option value="Zona 1">Zona 1: De 31km a 80km</option>
+            <option value="Zona 2">Zona 2: De 81km a 150km</option>
+            <option value="Zona 3">Zona 3: Más de 150km</option>
+            <option value="Online">Solo me interesa formación Online</option>
+          </select>
+        </div>
 
-      <div class="form-group" style="margin-bottom:1.5rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md);">
-        <h3 style="margin-bottom:1rem; font-size:1.2rem; color:var(--text-main);">Módulo 2 Recomendado <span style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">(Opcional)</span></h3>
-        <input type="text" id="genMod2Title" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem; margin-bottom:0.8rem;" placeholder="Título del Módulo">
-        <textarea id="genMod2Desc" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:80px; font-size:1rem;" placeholder="Contenido o puntos clave del módulo..."></textarea>
-      </div>
+        <div class="form-group">
+          <label class="form-label">Nivel actual de IA en el equipo</label>
+          <select name="nivel_ia" class="form-control" required>
+            <option value="">Selecciona nivel</option>
+            <option value="nulo">Ninguno, partimos de cero</option>
+            <option value="basico">Uso esporádico (ChatGPT gratuito)</option>
+            <option value="intermedio">Uso diario por algunos empleados</option>
+            <option value="avanzado">Tenemos flujos automatizados</option>
+          </select>
+        </div>
 
-      <div class="form-group" style="margin-bottom:2rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md);">
-        <h3 style="margin-bottom:1rem; font-size:1.2rem; color:var(--text-main);">Módulo 3 Recomendado <span style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">(Opcional)</span></h3>
-        <input type="text" id="genMod3Title" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem; margin-bottom:0.8rem;" placeholder="Título del Módulo">
-        <textarea id="genMod3Desc" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:80px; font-size:1rem;" placeholder="Contenido o puntos clave del módulo..."></textarea>
-      </div>
+        <div class="form-group">
+          <label class="form-label">Herramientas actuales</label>
+          <input type="text" name="herramientas" class="form-control" placeholder="Ej: M365, Google Workspace, Canva, CRM..." required>
+        </div>
 
-      <button onclick="generarEnlace()" style="width:100%; background:var(--text-main); color:white; padding:1.2rem; border:none; border-radius:var(--radius-sm); font-weight:600; cursor:pointer; font-size:1.1rem; margin-bottom:1.5rem; transition: background 0.3s;">🚀 Generar Enlace Mágico</button>
+        <div class="form-group">
+          <label class="form-label">Departamento o Área principal</label>
+          <select name="departamento" class="form-control" required>
+            <option value="">Selecciona área</option>
+            <option value="Dirección">Dirección</option>
+            <option value="Administración">Administración</option>
+            <option value="Ventas">Ventas</option>
+            <option value="Marketing">Marketing</option>
+            <option value="RRHH">Recursos Humanos</option>
+            <option value="Atención al Cliente">Atención al Cliente</option>
+            <option value="Operaciones">Operaciones</option>
+            <option value="Todo el equipo">Todo el equipo</option>
+          </select>
+        </div>
 
-      <div id="linkResult" style="display:none; background:var(--primary-light); padding:1.5rem; border-radius:var(--radius-sm); border:2px dashed var(--primary);">
-        <p style="font-weight:600; margin-bottom:0.8rem; font-size:1.1rem; color:var(--text-main);">✅ ¡Enlace listo para enviar!</p>
-        <input type="text" id="generatedLink" readonly style="width:100%; padding:1rem; background:white; border:1px solid #ddd; margin-bottom:0.8rem; font-size:1rem; border-radius: 4px; cursor:copy;" onclick="this.select(); document.execCommand('copy'); alert('¡Enlace copiado al portapapeles!');">
-        <p style="font-size:0.9rem; color:var(--text-muted);">Haz clic en el enlace para copiarlo y envíaselo al cliente por WhatsApp o email.</p>
-        <a id="testLink" href="#" target="_blank" style="display:inline-block; margin-top:1rem; color:var(--primary); font-weight:600; text-decoration:none;">👀 Abrir propuesta para revisarla &rarr;</a>
-      </div>
+        <div class="form-group">
+          <label class="form-label">Nº aproximado de personas a formar</label>
+          <input type="number" name="personas" class="form-control" min="1" placeholder="Ej: 5" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Modalidad Preferida</label>
+          <select name="modalidad_pref" class="form-control" required>
+            <option value="">Selecciona modalidad</option>
+            <option value="Online (Aula Virtual)">Online (Aula Virtual)</option>
+            <option value="Presencial (In-company)">Presencial (In-company)</option>
+            <option value="No lo tengo claro aún">No lo tengo claro aún</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Objetivo principal de la formación</label>
+          <textarea name="objetivo" class="form-control" rows="3" required placeholder="Ej: Queremos automatizar la atención al cliente, redactar mejores emails..."></textarea>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:1rem; margin-top:1.5rem;">
+          <button type="submit" class="btn btn-primary" style="width:100%;">
+            Solicitar Propuesta
+          </button>
+          <div class="loader" id="formLoader" style="display:none;"></div>
+        </div>
+      </form>
     </div>
   </div>
 
-  <script>
-    function generarEnlace() {
-      const empresa = document.getElementById('genEmpresa').value.trim();
-      const subtitulo = document.getElementById('genSubtitulo').value.trim();
-      const formato = document.getElementById('genFormato').value.trim();
-      const resumen = document.getElementById('genResumen').value.trim();
-      
-      const modalidad = document.getElementById('genModalidad').value;
-      const horas = parseInt(document.getElementById('genHoras').value) || 0;
-      const alumnos = parseInt(document.getElementById('genAlumnos').value) || 0;
-      const zonaVal = document.getElementById('genZona').value;
-      
-      const mod1Title = document.getElementById('genMod1Title').value.trim();
-      const mod1Desc = document.getElementById('genMod1Desc').value.trim();
-      const mod2Title = document.getElementById('genMod2Title').value.trim();
-      const mod2Desc = document.getElementById('genMod2Desc').value.trim();
-      const mod3Title = document.getElementById('genMod3Title').value.trim();
-      const mod3Desc = document.getElementById('genMod3Desc').value.trim();
-
-      if(!empresa || !resumen || !mod1Title) {
-        alert("⚠️ Por favor, rellena al menos el Nombre de la Empresa, el Resumen y el Módulo 1.");
-        return;
-      }
-
-      const modulos = [];
-      if(mod1Title) modulos.push({titulo: mod1Title, desc: mod1Desc});
-      if(mod2Title) modulos.push({titulo: mod2Title, desc: mod2Desc});
-      if(mod3Title) modulos.push({titulo: mod3Title, desc: mod3Desc});
-
-      let suplemento = 0;
-      if (zonaVal === 'custom') {
-        suplemento = 0;
-      } else {
-        suplemento = parseInt(zonaVal) || 0;
-      }
-      
-      const fundaeMax = 13 * horas * alumnos;
-      let precios = [];
-      
-      if (modalidad === 'Online' || modalidad === 'Ambas') {
-        const precioOnline = horas * 70;
-        precios.push({
-          tipo: 'Online (Aula Virtual)',
-          precio: precioOnline,
-          desc: 'Formación bonificable a través de los créditos de FUNDAE.',
-          fundae: Math.min(precioOnline, fundaeMax),
-          badge: modalidad === 'Ambas' ? 'OPCIÓN ONLINE' : 'BONIFICABLE FUNDAE'
-        });
-      }
-      
-      if (modalidad === 'In-company' || modalidad === 'Ambas') {
-        const precioInCompany = horas * 85;
-        let textInCompany = (suplemento > 0) ? `Incluye suplemento por desplazamiento. Formación bonificable a través de los créditos de FUNDAE.` : `Coste sin desplazamiento adicional (Zona 0). Formación bonificable a través de FUNDAE.`;
-        if (zonaVal === 'custom') textInCompany = "Desplazamiento sujeto a presupuesto a medida. Bonificable por FUNDAE.";
-        precios.push({
-          tipo: 'Presencial (In-company)',
-          precio: precioInCompany + suplemento,
-          desc: textInCompany,
-          fundae: Math.min(precioInCompany, fundaeMax),
-          badge: modalidad === 'Ambas' ? 'OPCIÓN IN-COMPANY' : 'BONIFICABLE FUNDAE'
-        });
-      }
-
-      const dataObj = {
-        empresa: empresa,
-        precios: precios,
-        subtitulo: subtitulo || 'Programa adaptado a sus necesidades',
-        formato: formato || 'Taller Práctico in-company',
-        resumen: resumen,
-        modulos: modulos
-      };
-
-      const jsonStr = JSON.stringify(dataObj);
-      const encoded = btoa(encodeURIComponent(jsonStr));
-
-      let baseUrl = window.location.href.split('?')[0].split('#')[0];
-      baseUrl = baseUrl.replace('index.html', '');
-      if(!baseUrl.endsWith('/')) baseUrl += '/';
-      
-      const finalLink = baseUrl + 'plantilla_propuesta.html#data=' + encoded;
-
-      document.getElementById('generatedLink').value = finalLink;
-      document.getElementById('testLink').href = finalLink;
-      document.getElementById('linkResult').style.display = 'block';
-      
-      // Scroll smoothly down to the result
-      window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
-    }
-  </script>
+  <!-- Note: el app.js maneja el modal, webhook.js maneja el envio -->
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/webhook.js"></script>
 </body>
 </html>

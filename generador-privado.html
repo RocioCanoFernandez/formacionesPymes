@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hub de Propuestas Comerciales | SeviAI</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      background-color: var(--surface);
+    }
+    .hub-container {
+      max-width: 1000px;
+      margin: 4rem auto;
+      padding: 0 2rem;
+    }
+    .hub-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .hub-header img {
+      max-width: 180px;
+      margin-bottom: 2rem;
+    }
+    .hub-header h1 {
+      font-size: 2.2rem;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .proposal-card {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: block;
+      color: var(--text-main);
+      border-top: 3px solid var(--border-color);
+    }
+    .proposal-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-top-color: var(--primary);
+    }
+    .proposal-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .alert-box {
+      background: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.5rem;
+      margin-bottom: 3rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hub-container">
+    <div class="hub-header">
+      <img src="assets/img/Vertical_Logo Rojo_Original_Sin_fondo.png" alt="SeviAI">
+      <h1>Panel de Control de Propuestas</h1>
+      <p style="color:var(--text-muted); font-size:1rem; font-family:'Roboto', sans-serif;">Gestor interno de dossiers interactivos para clientes.</p>
+    </div>
+
+    <div class="alert-box">
+      <strong>¿Qué es esta página?</strong> Esta página es solo para tu uso interno. Es tu "directorio" donde podrás ver todas las propuestas que vayas creando. A tus clientes NUNCA les enviarás esta página (index.html), sino el enlace directo a su propuesta específica (plantilla_propuesta.html).
+    </div>
+
+    <div class="grid-2">
+      <a href="index.html" class="proposal-card" style="border-top-color: #4b5563;">
+        <h3>Catálogo Genérico</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:1.5rem;">Enlace para enviar en frío</p>
+        <span class="card-badge" style="background:var(--border-color); color:var(--text-main);">Captación</span>
+      </a>
+
+
+      <!-- Placeholder para añadir nuevas propuestas -->
+      <div class="proposal-card" style="border: 1px dashed var(--border-color); background:transparent; cursor:pointer;" onclick="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});">
+        <div style="font-size: 2rem; color:var(--text-muted); margin-bottom: 1rem;">+</div>
+        <h3 style="color:var(--text-main);">Nueva Propuesta</h3>
+        <p style="color:var(--text-muted); font-size:0.9rem;">Ir al Generador (abajo)</p>
+      </div>
+    </div>
+
+    <!-- Generador Visual Integrado (Siempre visible) -->
+    <div id="generatorSection" style="margin-top: 4rem; background:var(--bg-color); padding:2.5rem; border-radius:var(--radius-md); box-shadow:var(--shadow-md); border-top: 4px solid var(--primary);">
+      <h2 style="margin-bottom:0.5rem; font-size:1.8rem; color:var(--text-main);">✨ Generador de Enlaces Mágicos</h2>
+      <p style="color:var(--text-muted); margin-bottom:2rem; font-size:1rem;">Pega aquí el texto del correo de la IA para crear el enlace interactivo al instante.</p>
+      
+      <div class="grid-2" style="margin-bottom: 1.5rem; gap: 1.5rem;">
+        <div class="form-group">
+          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nombre de la Empresa <span style="color:red">*</span></label>
+          <input type="text" id="genEmpresa" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: Empresa S.L.">
+        </div>
+        <div class="form-group" style="grid-column: 1 / -1; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+          <h3 style="margin-bottom:1rem; font-size:1.2rem; color:var(--text-main);">Calculadora de Inversión y FUNDAE</h3>
+          <div class="grid-2" style="gap: 1rem;">
+            <div>
+              <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Modalidad de Presupuesto <span style="color:red">*</span></label>
+              <select id="genModalidad" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
+                <option value="Online">Solo Online (Aula Virtual)</option>
+                <option value="In-company">Solo Presencial (In-company)</option>
+                <option value="Ambas">Mostrar Ambas Opciones (Recomendado si el cliente duda)</option>
+              </select>
+            </div>
+            <div>
+              <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nº de Horas Totales <span style="color:red">*</span></label>
+              <input type="number" id="genHoras" min="1" value="4" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
+              <span style="font-size:0.8rem; color:var(--text-muted);">*FUNDAE exige un mínimo de 2 horas.</span>
+            </div>
+            <div>
+              <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Nº de Alumnos <span style="color:red">*</span></label>
+              <input type="number" id="genAlumnos" min="1" value="5" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
+            </div>
+            <div>
+              <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Zona de Desplazamiento (In-company)</label>
+              <select id="genZona" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
+                <option value="0">Zona 0: Sevilla capital o hasta 30km (+0€)</option>
+                <option value="35">Zona 1: 31-60 km (+35€)</option>
+                <option value="65">Zona 2: 61-100 km (+65€)</option>
+                <option value="100">Zona 3: 101-150 km (+100€)</option>
+                <option value="custom">Zona 4: Más de 150 km (Consultar Coste)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Subtítulo Propuesta</label>
+          <input type="text" id="genSubtitulo" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: Programa adaptado a sus necesidades">
+        </div>
+        <div class="form-group">
+          <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Etiqueta (Formato/Fecha)</label>
+          <input type="text" id="genFormato" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;" placeholder="Ej: Nov 2026 · Taller Presencial">
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:2rem; padding-bottom:1.5rem; border-bottom: 1px dashed var(--border-color);">
+        <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Resumen y Análisis de la IA <span style="color:red">*</span></label>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:0.5rem;">Copia aquí el diagnóstico inicial que te ha enviado la IA en el correo.</p>
+        <textarea id="genResumen" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:120px; font-size:1rem;" placeholder="Pegar análisis..."></textarea>
+      </div>
+
+      <div class="form-group" style="margin-bottom:1.5rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md);">
+        <h3 style="margin-bottom:1rem; font-size:1.2rem; color:var(--text-main);">Módulo 1 Recomendado <span style="color:red">*</span></h3>
+        <input type="text" id="genMod1Title" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem; margin-bottom:0.8rem;" placeholder="Título del Módulo (Ej: Descubre la IA para tu negocio)">
+        <textarea id="genMod1Desc" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:80px; font-size:1rem;" placeholder="Contenido o puntos clave del módulo..."></textarea>
+      </div>
+
+      <div class="form-group" style="margin-bottom:1.5rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md);">
+        <h3 style="margin-bottom:1rem; font-size:1.2rem; color:var(--text-main);">Módulo 2 Recomendado <span style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">(Opcional)</span></h3>
+        <input type="text" id="genMod2Title" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem; margin-bottom:0.8rem;" placeholder="Título del Módulo">
+        <textarea id="genMod2Desc" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:80px; font-size:1rem;" placeholder="Contenido o puntos clave del módulo..."></textarea>
+      </div>
+
+      <div class="form-group" style="margin-bottom:2rem; background: var(--surface); padding: 1.5rem; border-radius: var(--radius-md);">
+        <h3 style="margin-bottom:1rem; font-size:1.2rem; color:var(--text-main);">Módulo 3 Recomendado <span style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">(Opcional)</span></h3>
+        <input type="text" id="genMod3Title" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem; margin-bottom:0.8rem;" placeholder="Título del Módulo">
+        <textarea id="genMod3Desc" style="width:100%; padding:0.8rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; min-height:80px; font-size:1rem;" placeholder="Contenido o puntos clave del módulo..."></textarea>
+      </div>
+
+      <button onclick="generarEnlace()" style="width:100%; background:var(--text-main); color:white; padding:1.2rem; border:none; border-radius:var(--radius-sm); font-weight:600; cursor:pointer; font-size:1.1rem; margin-bottom:1.5rem; transition: background 0.3s;">🚀 Generar Enlace Mágico</button>
+
+      <div id="linkResult" style="display:none; background:var(--primary-light); padding:1.5rem; border-radius:var(--radius-sm); border:2px dashed var(--primary);">
+        <p style="font-weight:600; margin-bottom:0.8rem; font-size:1.1rem; color:var(--text-main);">✅ ¡Enlace listo para enviar!</p>
+        <input type="text" id="generatedLink" readonly style="width:100%; padding:1rem; background:white; border:1px solid #ddd; margin-bottom:0.8rem; font-size:1rem; border-radius: 4px; cursor:copy;" onclick="this.select(); document.execCommand('copy'); alert('¡Enlace copiado al portapapeles!');">
+        <p style="font-size:0.9rem; color:var(--text-muted);">Haz clic en el enlace para copiarlo y envíaselo al cliente por WhatsApp o email.</p>
+        <a id="testLink" href="#" target="_blank" style="display:inline-block; margin-top:1rem; color:var(--primary); font-weight:600; text-decoration:none;">👀 Abrir propuesta para revisarla &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function generarEnlace() {
+      const empresa = document.getElementById('genEmpresa').value.trim();
+      const subtitulo = document.getElementById('genSubtitulo').value.trim();
+      const formato = document.getElementById('genFormato').value.trim();
+      const resumen = document.getElementById('genResumen').value.trim();
+      
+      const modalidad = document.getElementById('genModalidad').value;
+      const horas = parseInt(document.getElementById('genHoras').value) || 0;
+      const alumnos = parseInt(document.getElementById('genAlumnos').value) || 0;
+      const zonaVal = document.getElementById('genZona').value;
+      
+      const mod1Title = document.getElementById('genMod1Title').value.trim();
+      const mod1Desc = document.getElementById('genMod1Desc').value.trim();
+      const mod2Title = document.getElementById('genMod2Title').value.trim();
+      const mod2Desc = document.getElementById('genMod2Desc').value.trim();
+      const mod3Title = document.getElementById('genMod3Title').value.trim();
+      const mod3Desc = document.getElementById('genMod3Desc').value.trim();
+
+      if(!empresa || !resumen || !mod1Title) {
+        alert("⚠️ Por favor, rellena al menos el Nombre de la Empresa, el Resumen y el Módulo 1.");
+        return;
+      }
+
+      const modulos = [];
+      if(mod1Title) modulos.push({titulo: mod1Title, desc: mod1Desc});
+      if(mod2Title) modulos.push({titulo: mod2Title, desc: mod2Desc});
+      if(mod3Title) modulos.push({titulo: mod3Title, desc: mod3Desc});
+
+      let suplemento = 0;
+      if (zonaVal === 'custom') {
+        suplemento = 0;
+      } else {
+        suplemento = parseInt(zonaVal) || 0;
+      }
+      
+      const fundaeMax = 13 * horas * alumnos;
+      let precios = [];
+      
+      if (modalidad === 'Online' || modalidad === 'Ambas') {
+        const precioOnline = horas * 70;
+        precios.push({
+          tipo: 'Online (Aula Virtual)',
+          precio: precioOnline,
+          desc: 'Formación bonificable a través de los créditos de FUNDAE.',
+          fundae: Math.min(precioOnline, fundaeMax),
+          badge: modalidad === 'Ambas' ? 'OPCIÓN ONLINE' : 'BONIFICABLE FUNDAE'
+        });
+      }
+      
+      if (modalidad === 'In-company' || modalidad === 'Ambas') {
+        const precioInCompany = horas * 85;
+        let textInCompany = (suplemento > 0) ? `Incluye suplemento por desplazamiento. Formación bonificable a través de los créditos de FUNDAE.` : `Coste sin desplazamiento adicional (Zona 0). Formación bonificable a través de FUNDAE.`;
+        if (zonaVal === 'custom') textInCompany = "Desplazamiento sujeto a presupuesto a medida. Bonificable por FUNDAE.";
+        precios.push({
+          tipo: 'Presencial (In-company)',
+          precio: precioInCompany + suplemento,
+          desc: textInCompany,
+          fundae: Math.min(precioInCompany, fundaeMax),
+          badge: modalidad === 'Ambas' ? 'OPCIÓN IN-COMPANY' : 'BONIFICABLE FUNDAE'
+        });
+      }
+
+      const dataObj = {
+        empresa: empresa,
+        precios: precios,
+        subtitulo: subtitulo || 'Programa adaptado a sus necesidades',
+        formato: formato || 'Taller Práctico in-company',
+        resumen: resumen,
+        modulos: modulos
+      };
+
+      const jsonStr = JSON.stringify(dataObj);
+      const encoded = btoa(encodeURIComponent(jsonStr));
+
+      let baseUrl = window.location.href.split('?')[0].split('#')[0];
+      baseUrl = baseUrl.replace('generador-privado.html', '');
+      if(!baseUrl.endsWith('/')) baseUrl += '/';
+      
+      const finalLink = baseUrl + 'plantilla_propuesta.html#data=' + encoded;
+
+      document.getElementById('generatedLink').value = finalLink;
+      document.getElementById('testLink').href = finalLink;
+      document.getElementById('linkResult').style.display = 'block';
+      
+      // Scroll smoothly down to the result
+      window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'});
+    }
+  </script>
+</body>
+</html>
