@@ -1,19 +1,76 @@
 document.addEventListener('DOMContentLoaded', () => {
   // --- INICIO MAGIA ---
-  // Comprobar si hay un "Enlace Mágico" con datos incrustados en la URL
   const hashStr = window.location.hash;
-  let magicData = null;
-  if(hashStr && hashStr.startsWith('#data=')) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const proposalId = urlParams.get('id');
+
+  if (proposalId) {
+    // 1. Cargar desde Base de Datos (n8n Webhook GET)
+    // Rocío, cambia esta URL por la del webhook GET que crees en n8n
+    const webhookGetUrl = 'URL_DEL_WEBHOOK_GET_DE_N8N';
+    
+    if (webhookGetUrl === 'URL_DEL_WEBHOOK_GET_DE_N8N') {
+      alert("Aviso: Aún no has configurado el Webhook GET de n8n en app.js");
+    } else {
+      fetch(webhookGetUrl + '?id=' + proposalId)
+        .then(res => res.json())
+        .then(data => {
+          renderizarPropuesta(data);
+        })
+        .catch(err => {
+          console.error("Error cargando la propuesta desde n8n:", err);
+          alert("Error: No se pudo cargar la propuesta. Es posible que el enlace haya caducado o sea incorrecto.");
+        });
+    }
+  } else if(hashStr && hashStr.startsWith('#data=')) {
+    // 2. Cargar desde Base64 (Legacy o Fallback)
     try {
       const base64Str = hashStr.replace('#data=', '');
       const decodedStr = decodeURIComponent(atob(base64Str));
-      magicData = JSON.parse(decodedStr);
+      const magicData = JSON.parse(decodedStr);
+      renderizarPropuesta(magicData);
     } catch(e) {
       console.error("Error desencriptando el enlace mágico:", e);
     }
+  } else if (typeof configCliente !== 'undefined' && document.getElementById('clientName')) {
+    // 3. Cargar desde config.js (Pruebas locales)
+    populateDashboard(configCliente);
+  } else if (!document.getElementById('clientName')) {
+    console.log('Modo catálogo: No se requiere config.js para poblar datos.');
+  } else {
+    console.error('No se ha encontrado la configuración del cliente.');
+  }
+  // --- FIN MAGIA ---
+
+  // Manejo del Modal
+
+  const modal = document.getElementById('diagnosticModal');
+  const btnOpen = document.getElementById('btnOpenDiagnostic');
+  const btnClose = document.getElementById('btnCloseDiagnostic');
+
+  if(btnOpen && modal) {
+    btnOpen.addEventListener('click', () => {
+      modal.classList.add('active');
+    });
   }
 
-  // Cargar datos dinámicos
+  if(btnClose && modal) {
+    btnClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+  }
+
+  // Cerrar modal al clickear fuera
+  if(modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  }
+});
+
+function renderizarPropuesta(magicData) {
   if (magicData && document.getElementById('clientName')) {
     // Si venimos de un enlace mágico, clonamos la configuración base (si existe) y la sobrescribimos
     let configOverride = typeof configCliente !== 'undefined' ? JSON.parse(JSON.stringify(configCliente)) : {
@@ -61,42 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Limpiamos la URL para que no se vea el chorizo largo arriba (opcional pero estético)
     window.history.replaceState(null, null, ' '); 
-
-  } else if (typeof configCliente !== 'undefined' && document.getElementById('clientName')) {
-    populateDashboard(configCliente);
-  } else if (!document.getElementById('clientName')) {
-    console.log('Modo catálogo: No se requiere config.js para poblar datos.');
-  } else {
-    console.error('No se ha encontrado la configuración del cliente.');
   }
-  // --- FIN MAGIA ---
-
-  // Manejo del Modal
-  const modal = document.getElementById('diagnosticModal');
-  const btnOpen = document.getElementById('btnOpenDiagnostic');
-  const btnClose = document.getElementById('btnCloseDiagnostic');
-
-  if(btnOpen && modal) {
-    btnOpen.addEventListener('click', () => {
-      modal.classList.add('active');
-    });
-  }
-
-  if(btnClose && modal) {
-    btnClose.addEventListener('click', () => {
-      modal.classList.remove('active');
-    });
-  }
-
-  // Cerrar modal al clickear fuera
-  if(modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('active');
-      }
-    });
-  }
-});
+}
 
 function populateDashboard(data) {
   // Rellenar datos del cliente
