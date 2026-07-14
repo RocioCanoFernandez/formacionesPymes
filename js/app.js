@@ -83,8 +83,10 @@ function renderizarPropuesta(magicData) {
     // Generar avatar dinámico con las iniciales de la empresa
     configOverride.cliente.logo_url = "https://ui-avatars.com/api/?name=" + encodeURIComponent(magicData.empresa) + "&background=F2F2F2&color=D80F2C";
     configOverride.inversion.precios = magicData.precios || [];
-    configOverride.inversion.precio_base = magicData.precio;
-    configOverride.propuesta.subtitulo = magicData.subtitulo || configOverride.propuesta.subtitulo;
+    configOverride.inversion.precio_base = magicData.precio || "";
+    
+    // El formato antiguo usa subtitulo, el nuevo usa subtitulo_propuesta
+    configOverride.propuesta.subtitulo = magicData.subtitulo_propuesta || magicData.subtitulo || configOverride.propuesta.subtitulo;
     configOverride.propuesta.formato = magicData.formato || configOverride.propuesta.formato;
     
     // Forzar beneficios por si se perdieron
@@ -95,23 +97,71 @@ function renderizarPropuesta(magicData) {
       "Soporte continuo de dudas durante 30 días"
     ];
 
-    // Formatear Resumen inicial
-    const resumenFormateado = (magicData.resumen || magicData.texto || "").replace(/\n/g, '<br><br>').replace(/- /g, '• ');
-    
-    configOverride.resumen = resumenFormateado;
     configOverride.modulos = [];
-
-    // Añadir los módulos opcionales (Hacer)
-    if(magicData.modulos && magicData.modulos.length > 0) {
-      magicData.modulos.forEach((mod, index) => {
-        configOverride.modulos.push({
-          titulo: mod.titulo,
-          tipo: "Hacer",
-          duracion: "Módulo " + (index + 1),
-          descripcion: mod.desc.replace(/\n/g, '<br>').replace(/- /g, '• '),
-          puntos_clave: []
-        });
+    
+    // ==========================================
+    // NUEVA ESTRUCTURA (NODO REDACTOR N8N)
+    // ==========================================
+    if (magicData.formacion_recomendada) {
+      
+      // Resumen
+      let resumenHtml = "";
+      if (magicData.resumen_parrafo_1) resumenHtml += `<p>${magicData.resumen_parrafo_1}</p>`;
+      if (magicData.resumen_parrafo_2) resumenHtml += `<p>${magicData.resumen_parrafo_2}</p>`;
+      if (magicData.gobernanza_texto) resumenHtml += `<p style="padding: 1rem; background: var(--bg-color); border-left: 4px solid var(--primary); border-radius: 4px;"><strong>Gobernanza y Ética:</strong> ${magicData.gobernanza_texto}</p>`;
+      if (magicData.consultoria_texto) resumenHtml += `<p style="padding: 1rem; background: #FFF3CD; border-left: 4px solid #FFC107; border-radius: 4px; color: #856404;"><strong>Aviso de Consultoría:</strong> ${magicData.consultoria_texto}</p>`;
+      if (magicData.implementacion_texto) resumenHtml += `<p style="padding: 1rem; background: #D1ECF1; border-left: 4px solid #17A2B8; border-radius: 4px; color: #0C5460;"><strong>Aviso de Implementación:</strong> ${magicData.implementacion_texto}</p>`;
+      configOverride.resumen = resumenHtml;
+      
+      // Módulo 1 (Recomendada)
+      configOverride.modulos.push({
+        titulo: magicData.formacion_recomendada.titulo,
+        tipo: "Fase 1",
+        duracion: "Recomendado para empezar",
+        descripcion: magicData.formacion_recomendada.descripcion,
+        puntos_clave: magicData.formacion_recomendada.contenidos || []
       });
+      
+      // Módulo 2 (Ampliación 1)
+      if (magicData.ampliacion_1 && magicData.ampliacion_1.visible) {
+        configOverride.modulos.push({
+          titulo: magicData.ampliacion_1.titulo,
+          tipo: "Fase 2",
+          duracion: "Ampliación opcional",
+          descripcion: magicData.ampliacion_1.descripcion,
+          puntos_clave: magicData.ampliacion_1.contenidos || []
+        });
+      }
+      
+      // Módulo 3 (Ampliación 2)
+      if (magicData.ampliacion_2 && magicData.ampliacion_2.visible) {
+        configOverride.modulos.push({
+          titulo: magicData.ampliacion_2.titulo,
+          tipo: "Fase 3",
+          duracion: "Ampliación opcional",
+          descripcion: magicData.ampliacion_2.descripcion,
+          puntos_clave: magicData.ampliacion_2.contenidos || []
+        });
+      }
+      
+    // ==========================================
+    // ESTRUCTURA ANTIGUA (LEGACY / BASE64)
+    // ==========================================
+    } else {
+      const resumenFormateado = (magicData.resumen || magicData.texto || "").replace(/\n/g, '<br><br>').replace(/- /g, '• ');
+      configOverride.resumen = resumenFormateado;
+      
+      if(magicData.modulos && magicData.modulos.length > 0) {
+        magicData.modulos.forEach((mod, index) => {
+          configOverride.modulos.push({
+            titulo: mod.titulo,
+            tipo: "Hacer",
+            duracion: "Módulo " + (index + 1),
+            descripcion: mod.desc.replace(/\n/g, '<br>').replace(/- /g, '• '),
+            puntos_clave: []
+          });
+        });
+      }
     }
     
     populateDashboard(configOverride);
