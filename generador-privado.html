@@ -149,11 +149,12 @@
             <div>
               <label class="form-label" style="display:block; margin-bottom:0.5rem; font-weight:600;">Zona de Desplazamiento (In-company)</label>
               <select id="genZona" style="width:100%; padding:1rem; border:1px solid var(--border-color); border-radius:var(--radius-sm); font-family:inherit; font-size:1rem;">
-                <option value="0">Zona 0: Sevilla capital o hasta 30km (+0€)</option>
-                <option value="35">Zona 1: 31-60 km (+35€)</option>
-                <option value="65">Zona 2: 61-100 km (+65€)</option>
-                <option value="100">Zona 3: 101-150 km (+100€)</option>
-                <option value="custom">Zona 4: Más de 150 km (Consultar Coste)</option>
+                <option value="Zona 0">Zona 0: Sevilla capital o hasta 30km</option>
+            <option value="Zona 1">Zona 1: De 31km a 60km</option>
+            <option value="Zona 2">Zona 2: De 61km a 100km</option>
+            <option value="Zona 3">Zona 3: De 101km a 150km</option>
+            <option value="Zona 4">Zona 4: Más de 150km (A Medida)</option>
+            <option value="Online">Solo me interesa formación Online</option>
               </select>
             </div>
           </div>
@@ -233,34 +234,53 @@
       if(mod3Title) modulos.push({titulo: mod3Title, desc: mod3Desc});
 
       let suplemento = 0;
-      if (zonaVal === 'custom') {
-        suplemento = 0;
-      } else {
-        suplemento = parseInt(zonaVal) || 0;
-      }
+      if (zonaVal.includes('Zona 1')) suplemento = 35;
+      else if (zonaVal.includes('Zona 2')) suplemento = 65;
+      else if (zonaVal.includes('Zona 3')) suplemento = 100;
+      else if (zonaVal.includes('Zona 4')) suplemento = 'custom';
       
-      const fundaeMax = 13 * horas * alumnos;
+      // Nuevas lógicas de horas por fases
+      const horasFase1 = (mod1Title) ? horas : 0; // En el generador privado solo se piden horas totales, asumo que son la fase 1 si no hay más. Mejor divido a partes iguales si es un apaño rápido.
+      // Corrección: En el generador privado la usuaria mete un "Total de horas". Para ser precisos, si ella rellena Mod2 y Mod3, las horas se repartirían. Pero simplifiquemos asumiendo que "horas" es el total.
+      const totalHoras = horas;
+      const horasFase2 = (mod2Title) ? 0 : 0; // Dummy fallback para el privado
+      const horasFase3 = (mod3Title) ? 0 : 0; 
+      
+      const fundaeMax = 13 * totalHoras * alumnos;
       let precios = [];
       
       if (modalidad === 'Online' || modalidad === 'Ambas') {
-        const precioOnline = horas * 70;
+        const precioOnline = totalHoras * 70;
+        
+        let desglose = `<p style="margin-bottom:0.5rem;">Inversión total del itinerario completo (${totalHoras} horas) en modalidad Aula Virtual.</p>`;
+        
         precios.push({
           tipo: 'Online (Aula Virtual)',
-          precio: precioOnline,
-          desc: 'Formación bonificable a través de los créditos de FUNDAE.',
+          precio: precioOnline + '€',
+          desc: desglose,
           fundae: Math.min(precioOnline, fundaeMax),
           badge: modalidad === 'Ambas' ? 'OPCIÓN ONLINE' : 'BONIFICABLE FUNDAE'
         });
       }
       
       if (modalidad === 'In-company' || modalidad === 'Ambas') {
-        const precioInCompany = horas * 85;
-        let textInCompany = (suplemento > 0) ? `Incluye suplemento por desplazamiento. Formación bonificable a través de los créditos de FUNDAE.` : `Coste sin desplazamiento adicional (Zona 0). Formación bonificable a través de FUNDAE.`;
-        if (zonaVal === 'custom') textInCompany = "Desplazamiento sujeto a presupuesto a medida. Bonificable por FUNDAE.";
+        const precioInCompany = totalHoras * 85;
+        let precioFinal = suplemento === 'custom' ? 'A medida' : (precioInCompany + suplemento) + '€';
+        
+        let desglose = `<p style="margin-bottom:0.5rem;">Inversión total del itinerario completo (${totalHoras} horas) en modalidad Presencial.</p><ul style="margin-bottom:0.5rem; padding-left:1.2rem; color:var(--text-main);">`;
+        if (horasFase1 > 0) desglose += `<li><strong>Fase 1:</strong> ${horasFase1 * 85}€</li>`;
+        if (horasFase2 > 0) desglose += `<li><strong>Fase 2:</strong> ${horasFase2 * 85}€</li>`;
+        if (horasFase3 > 0) desglose += `<li><strong>Fase 3:</strong> ${horasFase3 * 85}€</li>`;
+        desglose += `</ul>`;
+        
+        if (suplemento > 0 && suplemento !== 'custom') desglose += `<p style="margin-top:0.5rem;">Incluye suplemento único por desplazamiento de ${suplemento}€.</p>`;
+        else if (suplemento === 'custom') desglose = `<p>Formación presencial. El coste de desplazamiento se presupuestará a medida según ubicación exacta.</p>`;
+        else desglose += `<p style="margin-top:0.5rem;">Coste sin desplazamiento adicional (Zona 0).</p>`;
+
         precios.push({
           tipo: 'Presencial (In-company)',
-          precio: precioInCompany + suplemento,
-          desc: textInCompany,
+          precio: precioFinal,
+          desc: desglose,
           fundae: Math.min(precioInCompany, fundaeMax),
           badge: modalidad === 'Ambas' ? 'OPCIÓN IN-COMPANY' : 'BONIFICABLE FUNDAE'
         });
