@@ -231,18 +231,24 @@ function populateDashboard(data) {
     if (data.inversion.precios && data.inversion.precios.length > 0) {
       data.inversion.precios.forEach(p => {
         const boxHTML = `
-          <div style="background:var(--bg-color); border:1px solid #e5e7eb; padding: 2rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; border-radius:4px; margin-bottom:1rem;">
-            <div>
-              <div class="card-badge" style="background:#1f2937; color:white; margin-bottom:1rem; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;">${p.badge || 'BONIFICABLE FUNDAE'}</div>
-              <h3 style="font-size: 2.5rem; color:var(--primary); font-family:'Roboto', sans-serif; margin-bottom:0.5rem;">${p.precio}€</h3>
-              <p style="color:var(--text-muted); font-size:0.9rem; max-width:400px; line-height:1.4;">
-                ${p.desc} <br><br>
-                <span style="font-size:0.85rem; opacity:0.8;">Formación bonificable a través de los créditos de FUNDAE hasta un máximo de <strong>${p.fundae}€</strong>.</span>
-              </p>
+          <div style="background:var(--bg-color); border:1px solid #e5e7eb; padding: 2.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:2rem; border-radius:8px; margin-bottom:1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+            <div style="flex: 1; min-width: 300px;">
+              <div class="card-badge" style="background:var(--primary); color:white; margin-bottom:1rem; font-weight:bold; text-transform:uppercase; letter-spacing:0.5px; font-size: 0.9rem; padding: 0.5rem 1rem;">${p.badge || 'BONIFICABLE FUNDAE'}</div>
+              <h3 style="font-size: 3.5rem; color:var(--text-main); font-weight: 800; font-family:'Roboto', sans-serif; margin-bottom:1rem; line-height: 1;">${p.precio}</h3>
+              
+              <div style="color:var(--text-muted); font-size:1rem; max-width:600px; line-height:1.6; margin-bottom: 1.5rem;">
+                ${p.desc}
+              </div>
+              
+              <div style="background: #E8F5E9; border-left: 4px solid #4CAF50; padding: 1rem 1.5rem; border-radius: 4px; display: inline-block;">
+                <span style="color: #2E7D32; font-size: 0.95rem; font-weight: 600;">
+                  ✓ Formación bonificable por FUNDAE hasta un máximo de ${p.fundae}€
+                </span>
+              </div>
             </div>
             
-            <div style="text-align:right;">
-              <a href="https://cal.com/rocio-cano-seviai" target="_blank" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem; display:inline-block; font-weight:bold; letter-spacing:0.5px;">AGENDAR REUNIÓN DE INICIO</a>
+            <div style="text-align:right; align-self: center;">
+              <a href="https://cal.com/rocio-cano-seviai" target="_blank" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.2rem 2.5rem; display:inline-block; font-weight:bold; letter-spacing:0.5px; box-shadow: 0 4px 12px rgba(216, 15, 44, 0.3);">AGENDAR REUNIÓN DE INICIO</a>
             </div>
           </div>
         `;
