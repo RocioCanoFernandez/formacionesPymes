@@ -18,7 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Recopilar datos
       const formData = new FormData(form);
-      const data = Object.fromEntries(formData.entries());
+      const data = {};
+      for (let [key, value] of formData.entries()) {
+        if (data[key]) {
+          data[key] = data[key] + ", " + value;
+        } else {
+          data[key] = value;
+        }
+      }
       
       // Añadir info de la empresa a la que se le hace la propuesta
       const clientNameEl = document.getElementById('clientName');
