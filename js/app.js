@@ -203,7 +203,16 @@ function populateDashboard(data) {
     else if(mod.tipo === 'Hacer') badgeClass = 'badge-hacer';
     else if(mod.tipo === 'Ser') badgeClass = 'badge-ser';
 
-    const pointsList = mod.puntos_clave.map(p => `<li>${p}</li>`).join('');
+    const pointsList = mod.puntos_clave.map(p => {
+      if (typeof p === 'string') return `<li>${p}</li>`;
+      if (typeof p === 'object' && p !== null) {
+        if (p.modulo) return `<li><strong>${p.modulo}</strong>: ${p.descripcion || p.horas + 'h' || ''}</li>`;
+        if (p.tema) return `<li><strong>${p.tema}</strong>: ${p.detalle || ''}</li>`;
+        const vals = Object.values(p).filter(v => typeof v === 'string' || typeof v === 'number');
+        return `<li>${vals.join(' - ')}</li>`;
+      }
+      return `<li>${String(p)}</li>`;
+    }).join('');
 
     const modHTML = `
       <div class="card">
