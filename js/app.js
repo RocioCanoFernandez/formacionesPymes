@@ -108,10 +108,14 @@ function renderizarPropuesta(magicData) {
       let resumenHtml = "";
       if (magicData.resumen_parrafo_1) resumenHtml += `<p>${magicData.resumen_parrafo_1}</p>`;
       if (magicData.resumen_parrafo_2) resumenHtml += `<p>${magicData.resumen_parrafo_2}</p>`;
-      if (magicData.gobernanza_texto) resumenHtml += `<p style="padding: 1rem; background: var(--bg-color); border-left: 4px solid var(--primary); border-radius: 4px;"><strong>Gobernanza y Ética:</strong> ${magicData.gobernanza_texto}</p>`;
-      if (magicData.consultoria_texto) resumenHtml += `<p style="padding: 1rem; background: #FFF3CD; border-left: 4px solid #FFC107; border-radius: 4px; color: #856404;"><strong>Aviso de Consultoría:</strong> ${magicData.consultoria_texto}</p>`;
-      if (magicData.implementacion_texto) resumenHtml += `<p style="padding: 1rem; background: #D1ECF1; border-left: 4px solid #17A2B8; border-radius: 4px; color: #0C5460;"><strong>Aviso de Implementación:</strong> ${magicData.implementacion_texto}</p>`;
       configOverride.resumen = resumenHtml;
+      
+      // Guardamos los textos extra en la configuración para inyectarlos en cajas bonitas después
+      configOverride.extra = {
+        consultoria: magicData.consultoria_texto || null,
+        implementacion: magicData.implementacion_texto || null,
+        gobernanza: magicData.gobernanza_texto || null
+      };
       
       // Módulo 1 (Recomendada)
       configOverride.modulos.push({
@@ -213,6 +217,40 @@ function populateDashboard(data) {
     `;
     modulesContainer.insertAdjacentHTML('beforeend', modHTML);
   });
+  }
+
+  // Rellenar Servicios Extra
+  const serviciosExtraContainer = document.getElementById('serviciosExtraContainer');
+  if (serviciosExtraContainer && data.extra) {
+    serviciosExtraContainer.innerHTML = '';
+    
+    if (data.extra.consultoria) {
+      serviciosExtraContainer.insertAdjacentHTML('beforeend', `
+          <div class="card" style="background:white; border-left: 4px solid #f59e0b;">
+            <div class="card-badge" style="background:#fef3c7; color:#b45309; margin-bottom:1rem; font-weight:bold; letter-spacing:0.5px;">Fase Estratégica</div>
+            <h3 class="card-title">Consultoría y Roadmap</h3>
+            <p class="card-desc" style="margin-bottom: 0;">${data.extra.consultoria}</p>
+          </div>
+      `);
+    }
+    if (data.extra.implementacion) {
+      serviciosExtraContainer.insertAdjacentHTML('beforeend', `
+          <div class="card" style="background:white; border-left: 4px solid #3b82f6;">
+            <div class="card-badge" style="background:#dbeafe; color:#1d4ed8; margin-bottom:1rem; font-weight:bold; letter-spacing:0.5px;">Fase Técnica</div>
+            <h3 class="card-title">Implementación y Desarrollo</h3>
+            <p class="card-desc" style="margin-bottom: 0;">${data.extra.implementacion}</p>
+          </div>
+      `);
+    }
+    if (data.extra.gobernanza) {
+      serviciosExtraContainer.insertAdjacentHTML('beforeend', `
+          <div class="card span-2-desktop" style="background:white; border-left: 4px solid #10b981;">
+            <div class="card-badge" style="background:#d1fae5; color:#047857; margin-bottom:1rem; font-weight:bold; letter-spacing:0.5px;">Seguridad y Auditoría</div>
+            <h3 class="card-title">Uso Seguro, Ciberseguridad y Gobernanza</h3>
+            <p class="card-desc" style="margin-bottom: 0;">${data.extra.gobernanza}</p>
+          </div>
+      `);
+    }
   }
 
   // Rellenar Beneficios
