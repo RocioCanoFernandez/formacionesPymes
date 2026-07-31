@@ -365,18 +365,14 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">Departamento o Área principal</label>
-          <select name="departamento" class="form-control" required>
-            <option value="">Selecciona área</option>
-            <option value="Dirección">Dirección</option>
-            <option value="Administración">Administración</option>
-            <option value="Ventas">Ventas</option>
-            <option value="Marketing">Marketing</option>
-            <option value="RRHH">Recursos Humanos</option>
-            <option value="Atención al Cliente">Atención al Cliente</option>
-            <option value="Operaciones">Operaciones</option>
-            <option value="Todo el equipo">Todo el equipo</option>
-          </select>
+          <label class="form-label" style="margin-bottom:0.8rem; display:block;">¿Qué departamentos participarán en esta primera fase formativa?</label>
+          <div style="display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1rem; font-size:0.95rem; color:var(--text-muted);">
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="checkbox" name="departamentos_implicados" value="Dirección / Gerencia"> Dirección / Gerencia</label>
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="checkbox" name="departamentos_implicados" value="Marketing y Ventas"> Marketing y Ventas</label>
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="checkbox" name="departamentos_implicados" value="Administración / Finanzas"> Administración / Finanzas</label>
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="checkbox" name="departamentos_implicados" value="Recursos Humanos"> Recursos Humanos</label>
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="checkbox" name="departamentos_implicados" value="Operaciones / Atención al Cliente"> Operaciones / Atención al Cliente</label>
+          </div>
         </div>
 
         <div class="form-group">
@@ -413,27 +409,36 @@
           </div>
         </div>
 
-        <!-- SECCIÓN 2: NIVEL DE ADOPCIÓN (FORMACIÓN) -->
-        <h4 style="margin-top:2.5rem; margin-bottom:1rem; color:var(--primary); font-size:1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom:0.5rem;">2. Nivel de Adopción (Formación)</h4>
+        <!-- SECCIÓN 2: HERRAMIENTAS Y ADOPCIÓN -->
+        <h4 style="margin-top:2.5rem; margin-bottom:1rem; color:var(--primary); font-size:1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom:0.5rem;">2. Herramientas y Nivel de Adopción</h4>
 
         <div class="form-group">
-          <label class="form-label">3. Si tuvieras que ponerle una nota a tu equipo en "conocimiento de IA aplicada", del 1 al 5, ¿cuál sería?</label>
-          <div style="display:flex; justify-content:space-between; max-width: 350px; margin-top:0.5rem; margin-bottom:1rem; font-size:0.9rem; color:var(--text-muted);">
-            <label style="display:flex; flex-direction:column; align-items:center; cursor:pointer;"><input type="radio" name="nivel_equipo" value="1" required style="margin-bottom:0.3rem;">1 (Nulo)</label>
-            <label style="display:flex; flex-direction:column; align-items:center; cursor:pointer;"><input type="radio" name="nivel_equipo" value="2" style="margin-bottom:0.3rem;">2</label>
-            <label style="display:flex; flex-direction:column; align-items:center; cursor:pointer;"><input type="radio" name="nivel_equipo" value="3" style="margin-bottom:0.3rem;">3</label>
-            <label style="display:flex; flex-direction:column; align-items:center; cursor:pointer;"><input type="radio" name="nivel_equipo" value="4" style="margin-bottom:0.3rem;">4</label>
-            <label style="display:flex; flex-direction:column; align-items:center; cursor:pointer;"><input type="radio" name="nivel_equipo" value="5" style="margin-bottom:0.3rem;">5 (Pro)</label>
+          <label class="form-label" style="margin-bottom:0.8rem; display:block;">3. ¿Cuál es el ecosistema tecnológico principal en vuestra empresa?</label>
+          <div style="display:flex; justify-content:space-between; max-width: 450px; margin-top:0.5rem; margin-bottom:1rem; font-size:0.9rem; color:var(--text-muted); gap: 1rem;">
+            <label style="display:flex; flex-direction:column; align-items:center; cursor:pointer; text-align:center;"><input type="radio" name="ecosistema" value="Microsoft 365" required style="margin-bottom:0.3rem;">Microsoft 365</label>
+            <label style="display:flex; flex-direction:column; align-items:center; cursor:pointer; text-align:center;"><input type="radio" name="ecosistema" value="Google Workspace" style="margin-bottom:0.3rem;">Google Workspace</label>
+            <label style="display:flex; flex-direction:column; align-items:center; cursor:pointer; text-align:center;"><input type="radio" name="ecosistema" value="Software propio / ERP" style="margin-bottom:0.3rem;">Software propio / ERP</label>
+            <label style="display:flex; flex-direction:column; align-items:center; cursor:pointer; text-align:center;"><input type="radio" name="ecosistema" value="Otro" style="margin-bottom:0.3rem;">Otro / Mixto</label>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label" style="margin-bottom:0.8rem; display:block;">4. ¿Usáis actualmente herramientas como ChatGPT, Copilot o Gemini en el día a día?</label>
+          <label class="form-label" style="margin-bottom:0.8rem; display:block;">4. ¿La empresa ya está pagando licencias de IA (ej: ChatGPT Plus, Copilot) o usáis versiones gratuitas?</label>
           <div style="display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1rem; font-size:0.95rem; color:var(--text-muted);">
-            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="uso_actual_ia" value="No, partimos de cero" required> No, partimos de cero.</label>
-            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="uso_actual_ia" value="Sí, de forma puntual"> Sí, de forma puntual (algunas personas por su cuenta).</label>
-            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="uso_actual_ia" value="Sí, varias personas pero sin criterio"> Sí, lo usan varias personas, pero sin un criterio común.</label>
-            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="uso_actual_ia" value="Sí, flujos de trabajo claros"> Sí, tenemos flujos de trabajo claros con herramientas pro.</label>
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="licencias_ia" value="No usamos IA" required> Aún no usamos IA en el día a día.</label>
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="licencias_ia" value="Versiones gratuitas"> Algunos usamos versiones gratuitas de vez en cuando.</label>
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="licencias_ia" value="Licencias sueltas sin estrategia"> Hemos comprado algunas licencias de pago, pero cada uno lo usa a su manera.</label>
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="licencias_ia" value="Licencias corporativas con estrategia"> Sí, tenemos licencias para el equipo y un flujo de trabajo claro.</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" style="margin-bottom:0.8rem; display:block;">5. ¿Cuál creéis que es el mayor freno para avanzar con la IA en vuestra empresa?</label>
+          <div style="display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1rem; font-size:0.95rem; color:var(--text-muted);">
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="freno_ia" value="Falta de tiempo" required> Falta de tiempo para formarnos e investigar.</label>
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="freno_ia" value="Miedo a los datos"> Miedo a la privacidad y fuga de datos confidenciales.</label>
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="freno_ia" value="Falta de conocimiento"> No sabemos por dónde empezar ni qué herramientas elegir.</label>
+            <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="freno_ia" value="Cultura de empresa"> Resistencia al cambio o falta de presupuesto.</label>
           </div>
         </div>
 
@@ -441,7 +446,7 @@
         <h4 style="margin-top:2.5rem; margin-bottom:1rem; color:var(--primary); font-size:1.1rem; border-bottom: 1px solid var(--border-color); padding-bottom:0.5rem;">3. Riesgos y Gobernanza</h4>
 
         <div class="form-group">
-          <label class="form-label" style="margin-bottom:0.8rem; display:block;">5. ¿Trabajáis habitualmente con información sensible o confidencial?</label>
+          <label class="form-label" style="margin-bottom:0.8rem; display:block;">6. ¿Trabajáis habitualmente con información sensible o confidencial?</label>
           <div style="display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1rem; font-size:0.95rem; color:var(--text-muted);">
             <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="datos_sensibles" value="Sí" required> Sí (Datos de clientes, financieros, contratos, de salud, etc.)</label>
             <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="datos_sensibles" value="No especialmente"> No especialmente.</label>
@@ -449,7 +454,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" style="margin-bottom:0.8rem; display:block;">6. ¿La empresa tiene alguna política, guía interna o formación sobre el uso seguro de IA?</label>
+          <label class="form-label" style="margin-bottom:0.8rem; display:block;">7. ¿La empresa tiene alguna política, guía interna o formación sobre el uso seguro de IA?</label>
           <div style="display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1rem; font-size:0.95rem; color:var(--text-muted);">
             <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="politica_interna_ia" value="No" required> No, cada uno hace lo que puede.</label>
             <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="politica_interna_ia" value="Sí, pero no formalizada"> Sí, pero no está muy formalizada o se aplica poco.</label>
@@ -458,7 +463,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label" style="margin-bottom:0.8rem; display:block;">7. Para terminar, ¿os interesaría recibir pautas iniciales sobre Ciberseguridad y Protección de Datos aplicada a la IA?</label>
+          <label class="form-label" style="margin-bottom:0.8rem; display:block;">8. Para terminar, ¿os interesaría recibir pautas iniciales sobre Ciberseguridad y Protección de Datos aplicada a la IA?</label>
           <div style="display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1rem; font-size:0.95rem; color:var(--text-muted);">
             <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="interes_ciberseguridad" value="Sí" required> Sí, nos interesa mucho asegurar nuestros procesos.</label>
             <label style="cursor:pointer; display:flex; align-items:flex-start; gap:0.5rem;"><input type="radio" name="interes_ciberseguridad" value="De momento productividad"> De momento preferimos centrarnos solo en productividad y aprendizaje.</label>
