@@ -119,33 +119,27 @@ function renderizarPropuesta(magicData) {
       
       // Módulo 1 (Recomendada)
       configOverride.modulos.push({
-        titulo: magicData.formacion_recomendada.titulo,
-        tipo: "Fase 1",
-        duracion: "Recomendado para empezar",
+        titulo: magicData.formacion_recomendada.titulo || "Arranque 360 de IA",
+        tipo: "Arranque 360",
+        duracion: (magicData.formacion_recomendada.horas ? magicData.formacion_recomendada.horas + "h" : "") + (magicData.formacion_recomendada.modalidad ? " - " + magicData.formacion_recomendada.modalidad : ""),
         descripcion: magicData.formacion_recomendada.descripcion,
         puntos_clave: magicData.formacion_recomendada.contenidos || []
       });
       
-      // Módulo 2 (Ampliación 1)
+      // Módulo 2 (Líneas de continuidad / Ampliación 1)
       if (magicData.ampliacion_1 && magicData.ampliacion_1.visible) {
         configOverride.modulos.push({
           titulo: magicData.ampliacion_1.titulo,
-          tipo: "Fase 2",
-          duracion: "Ampliación opcional",
+          tipo: "Continuidad",
+          duracion: "",
           descripcion: magicData.ampliacion_1.descripcion,
           puntos_clave: magicData.ampliacion_1.contenidos || []
         });
       }
-      
-      // Módulo 3 (Ampliación 2)
-      if (magicData.ampliacion_2 && magicData.ampliacion_2.visible) {
-        configOverride.modulos.push({
-          titulo: magicData.ampliacion_2.titulo,
-          tipo: "Fase 3",
-          duracion: "Ampliación opcional",
-          descripcion: magicData.ampliacion_2.descripcion,
-          puntos_clave: magicData.ampliacion_2.contenidos || []
-        });
+
+      // Apoyos Especializados
+      if (magicData.apoyos_especializados && magicData.apoyos_especializados.length > 0) {
+        configOverride.apoyos_especializados = magicData.apoyos_especializados;
       }
       
     // ==========================================
@@ -237,8 +231,8 @@ function populateDashboard(data) {
     if (data.extra.consultoria) {
       serviciosExtraContainer.insertAdjacentHTML('beforeend', `
           <div class="card" style="background:white; border-left: 4px solid #f59e0b;">
-            <div class="card-badge" style="background:#fef3c7; color:#b45309; margin-bottom:1rem; font-weight:bold; letter-spacing:0.5px;">Fase Estratégica</div>
-            <h3 class="card-title">Consultoría y Roadmap</h3>
+            <div class="card-badge" style="background:#fef3c7; color:#b45309; margin-bottom:1rem; font-weight:bold; letter-spacing:0.5px;">Consultoría</div>
+            <h3 class="card-title">Procesos que merece la pena revisar</h3>
             <p class="card-desc" style="margin-bottom: 0;">${data.extra.consultoria}</p>
           </div>
       `);
@@ -246,7 +240,7 @@ function populateDashboard(data) {
     if (data.extra.implementacion) {
       serviciosExtraContainer.insertAdjacentHTML('beforeend', `
           <div class="card" style="background:white; border-left: 4px solid #3b82f6;">
-            <div class="card-badge" style="background:#dbeafe; color:#1d4ed8; margin-bottom:1rem; font-weight:bold; letter-spacing:0.5px;">Fase Técnica</div>
+            <div class="card-badge" style="background:#dbeafe; color:#1d4ed8; margin-bottom:1rem; font-weight:bold; letter-spacing:0.5px;">Implementación</div>
             <h3 class="card-title">Implementación y Desarrollo</h3>
             <p class="card-desc" style="margin-bottom: 0;">${data.extra.implementacion}</p>
           </div>
@@ -255,11 +249,22 @@ function populateDashboard(data) {
     if (data.extra.gobernanza) {
       serviciosExtraContainer.insertAdjacentHTML('beforeend', `
           <div class="card span-2-desktop" style="background:white; border-left: 4px solid #10b981;">
-            <div class="card-badge" style="background:#d1fae5; color:#047857; margin-bottom:1rem; font-weight:bold; letter-spacing:0.5px;">Seguridad y Auditoría</div>
-            <h3 class="card-title">Uso Seguro, Ciberseguridad y Gobernanza</h3>
+            <div class="card-badge" style="background:#d1fae5; color:#047857; margin-bottom:1rem; font-weight:bold; letter-spacing:0.5px;">Gobernanza</div>
+            <h3 class="card-title">Uso seguro y responsable de la IA</h3>
             <p class="card-desc" style="margin-bottom: 0;">${data.extra.gobernanza}</p>
           </div>
       `);
+    }
+
+    if (data.apoyos_especializados && data.apoyos_especializados.length > 0) {
+      const apoyosHTML = data.apoyos_especializados.map(apoyo => `
+        <div class="card span-2-desktop" style="background:white; border-left: 4px solid #8b5cf6;">
+          <div class="card-badge" style="background:#ede9fe; color:#6d28d9; margin-bottom:1rem; font-weight:bold; letter-spacing:0.5px;">${apoyo.tipo || 'Apoyo Especializado'}</div>
+          <h3 class="card-title">${apoyo.nombre}</h3>
+          <p class="card-desc" style="margin-bottom: 0;">${apoyo.texto}</p>
+        </div>
+      `).join('');
+      serviciosExtraContainer.insertAdjacentHTML('beforeend', apoyosHTML);
     }
   }
 
