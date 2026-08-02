@@ -257,7 +257,7 @@ a:hover {
 /* Grid Layouts */
 .grid-2 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
   gap: 1.5rem;
 }
 
@@ -542,5 +542,49 @@ select.form-control {
   .facilitator {
     flex-direction: column;
     text-align: center;
+  }
+}
+
+/* Footer Responsive */
+.footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.footer-logo img {
+  height: 80px;
+  object-fit: contain;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.8rem;
+  border-left: 2px solid var(--border-color);
+  padding-left: 2rem;
+  min-height: 80px;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+  .footer-section {
+    border-left: none;
+    border-top: 1px solid var(--border-color);
+    padding-left: 0;
+    padding-top: 1rem;
+    min-height: auto;
   }
 }
