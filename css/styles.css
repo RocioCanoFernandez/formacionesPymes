@@ -587,4 +587,21 @@ select.form-control {
     padding-top: 1rem;
     min-height: auto;
   }
+  .main-content {
+    padding: 1rem;
+  }
+  .hero {
+    padding: 2.5rem 1.5rem;
+  }
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  .section {
+    padding: 1.5rem;
+  }
+  .diagnostic-banner {
+    padding: 1.5rem;
+    text-align: center;
+    justify-content: center;
+  }
 }
