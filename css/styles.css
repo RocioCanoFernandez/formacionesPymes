@@ -575,6 +575,10 @@ select.form-control {
 }
 
 @media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
   .footer {
     flex-direction: column;
     gap: 2rem;
@@ -588,20 +592,36 @@ select.form-control {
     min-height: auto;
   }
   .main-content {
-    padding: 1rem;
+    padding: 1rem !important;
+    overflow: hidden;
   }
   .hero {
-    padding: 2.5rem 1.5rem;
+    padding: 2rem 1.2rem !important;
   }
   .hero h1 {
-    font-size: 1.8rem;
+    font-size: 1.8rem !important;
+    word-wrap: break-word;
   }
   .section {
-    padding: 1.5rem;
+    padding: 1.5rem !important;
   }
   .diagnostic-banner {
-    padding: 1.5rem;
+    padding: 1.5rem !important;
     text-align: center;
     justify-content: center;
+  }
+  
+  /* Overrides for inline styles that break mobile layout */
+  [style*="padding: 3rem 2rem"] {
+    padding: 1.5rem !important;
+  }
+  [style*="padding: 2.5rem"] {
+    padding: 1.5rem !important;
+  }
+  [style*="min-width: 300px"] {
+    min-width: 0 !important;
+  }
+  [style*="font-size: 3.5rem"] {
+    font-size: 2.5rem !important;
   }
 }
